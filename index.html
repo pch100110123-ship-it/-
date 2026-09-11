@@ -50,18 +50,25 @@
         /* 타이머 스타일 */
         .timer-input-area {
             display: flex;
-            gap: 8px;
+            gap: 5px;
             margin-bottom: 15px;
             justify-content: center;
+            align-items: center;
         }
 
         .timer-input-area input {
-            width: 100px;
+            width: 50px;
             padding: 8px;
             font-size: 16px;
             border: 1px solid #ddd;
             border-radius: 6px;
             text-align: center;
+        }
+
+        .timer-input-area span {
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
         }
 
         .timer-display {
@@ -87,7 +94,7 @@
             font-weight: bold;
         }
 
-        .btn-set { background-color: #3498db; color: white; }
+        .btn-set { background-color: #3498db; color: white; padding: 10px 12px; font-size: 14px;}
         .btn-start { background-color: #2ecc71; color: white; }
         .btn-pause { background-color: #e74c3c; color: white; }
         .btn-reset { background-color: #95a5a6; color: white; }
@@ -138,20 +145,22 @@
 <body>
 
     <h1>📚 스터디 메이트</h1>
-    <p>공부 시간을 설정하고 오늘 할 일을 관리해보세요!</p>
+    <p>공부 시간을 세밀하게 설정하고 오늘 할 일을 관리해보세요!</p>
 
     <div class="container">
         <!-- 공부 타이머 카드 -->
         <div class="card">
-            <h2>⏱️ 직접 설정 타이머</h2>
+            <h2>⏱️ 시/분/초 설정 타이머</h2>
             
-            <!-- 시간 입력 영역 추가 -->
+            <!-- 시, 분, 초 입력 영역 -->
             <div class="timer-input-area">
-                <input type="number" id="minuteInput" placeholder="분 입력" min="1" max="180" value="25">
-                <button class="btn-set" onclick="setTime()">시간 설정</button>
+                <input type="number" id="hourInput" min="0" max="23" value="0"><span>시</span>
+                <input type="number" id="minuteInput" min="0" max="59" value="25"><span>분</span>
+                <input type="number" id="secondInput" min="0" max="59" value="0"><span>초</span>
+                <button class="btn-set" onclick="setTime()">설정</button>
             </div>
 
-            <div class="timer-display" id="timer">25:00</div>
+            <div class="timer-display" id="timer">00:25:00</div>
             
             <div class="timer-btns">
                 <button class="btn-start" onclick="startTimer()">시작</button>
@@ -172,32 +181,38 @@
     </div>
 
     <script>
-        // --- 1. 타이머 자바스크립트 기능 (수정됨) ---
-        let timeLeft = 25 * 60; // 기본값 25분
-        let initialTime = 25 * 60; // 초기화나 재설정을 위한 저장용
+        // --- 1. 타이머 자바스크립트 기능 (시/분/초 지원) ---
+        let timeLeft = 25 * 60; // 기본값 25분 (초 단위)
+        let initialTime = 25 * 60; 
         let timerId = null;
         const timerDisplay = document.getElementById('timer');
 
         function updateTimerDisplay() {
-            const minutes = Math.floor(timeLeft / 60);
+            const hours = Math.floor(timeLeft / 3600);
+            const minutes = Math.floor((timeLeft % 3600) / 60);
             const seconds = timeLeft % 60;
+
+            // 시:분:초 형태로 화면에 표시 (예: 01:25:30)
             timerDisplay.textContent = 
-                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         }
 
-        // 사용자가 입력한 분으로 타이머를 설정하는 함수
+        // 사용자가 입력한 시, 분, 초를 초 단위로 변환해 설정하는 함수
         function setTime() {
-            const minuteInput = document.getElementById('minuteInput');
-            const minutes = parseInt(minuteInput.value);
+            const hours = parseInt(document.getElementById('hourInput').value) || 0;
+            const minutes = parseInt(document.getElementById('minuteInput').value) || 0;
+            const seconds = parseInt(document.getElementById('secondInput').value) || 0;
 
-            if (isNaN(minutes) || minutes <= 0) {
-                alert('올바른 분(숫자)을 입력해주세요!');
+            const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+
+            if (totalSeconds <= 0) {
+                alert('0초보다 큰 시간을 설정해주세요!');
                 return;
             }
 
-            pauseTimer(); // 설정 중에는 타이머 멈춤
-            timeLeft = minutes * 60;
-            initialTime = timeLeft; // 초기화 버튼을 눌렀을 때 이 시간으로 돌아오도록 저장
+            pauseTimer(); 
+            timeLeft = totalSeconds;
+            initialTime = totalSeconds; 
             updateTimerDisplay();
         }
 
@@ -224,7 +239,7 @@
         function resetTimer() {
             clearInterval(timerId);
             timerId = null;
-            timeLeft = initialTime; // 마지막으로 설정했던 시간으로 되돌림
+            timeLeft = initialTime; 
             updateTimerDisplay();
         }
 
