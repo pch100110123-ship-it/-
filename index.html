@@ -6,42 +6,41 @@
     <title>학교알리미 - 고등학교 일정 & D-Day 허브</title>
     <!-- Tailwind CSS with modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Pretendard & Inter fonts -->
+    <!-- Pretendard font -->
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css" rel="stylesheet">
     <style>
         body { font-family: 'Pretendard', sans-serif; }
         /* Custom smooth scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
-        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 9999px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.03); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.15); border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.3); }
         
-        .glass-card {
-            background: rgba(30, 41, 59, 0.75);
+        .light-card {
+            background: #ffffff;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+        .light-header {
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .glass-header {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
         }
         .glow-effect {
-            box-shadow: 0 0 25px -5px rgba(129, 140, 248, 0.25);
+            box-shadow: 0 0 25px -5px rgba(79, 70, 229, 0.15);
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col selection:bg-indigo-600 selection:text-white">
 
-    <!-- HEADER -->
-    <header class="glass-header sticky top-0 z-40">
+    <!-- HEADER (Pure White Theme, No Simulation/Theme toggle buttons) -->
+    <header class="light-header sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between py-3">
             <div class="flex items-center space-x-3.5">
                 <div class="relative">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl blur opacity-70 animate-pulse"></div>
-                    <div class="relative bg-slate-900 text-indigo-400 p-2.5 rounded-2xl border border-indigo-500/30 shadow-lg">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-2xl blur opacity-30"></div>
+                    <div class="relative bg-indigo-600 text-white p-2.5 rounded-2xl shadow-md">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
@@ -49,20 +48,17 @@
                 </div>
                 <div>
                     <div class="flex items-center space-x-2">
-                        <h1 class="text-xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400">학교알리미</h1>
-                        <span class="bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-[10px] font-extrabold px-2 py-0.5 rounded-full">v2.5 PRO</span>
+                        <h1 class="text-xl font-black tracking-tight text-slate-900">학교알리미</h1>
+                        <span class="bg-indigo-100 text-indigo-700 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-indigo-200">v3.0 CLEAN</span>
                     </div>
-                    <p class="text-xs text-slate-400 font-medium mt-0.5">고등학생을 위한 스마트 알림 & D-Day 캘린더 허브</p>
+                    <p class="text-xs text-slate-500 font-medium mt-0.5">고등학생을 위한 스마트 알림 & D-Day 캘린더 허브</p>
                 </div>
             </div>
             
             <div class="flex items-center space-x-3">
-                <button onclick="openSimulationModal()" class="group relative inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white px-4 py-2.5 rounded-2xl text-xs font-bold transition shadow-lg shadow-indigo-500/25 border border-indigo-400/30 active:scale-95">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-200 group-hover:rotate-12 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.655V5a2 2 0 10-4 0v.345C7.670.765 6 3.122 6 6v8.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                    </svg>
-                    <span>새 알림 시뮬레이션</span>
-                </button>
+                <span class="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-2 rounded-xl border border-slate-200">
+                    📅 2026년 9월 18일 기준
+                </span>
             </div>
         </div>
     </header>
@@ -70,23 +66,23 @@
     <!-- MAIN DASHBOARD -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-        <!-- LEFT PANEL: Auto-organized notifications & incoming events (5 cols) -->
-        <section class="lg:col-span-5 flex flex-col glass-card rounded-3xl overflow-hidden shadow-2xl border border-slate-800">
-            <div class="p-5 border-b border-slate-800/80 flex items-center justify-between bg-slate-900/60">
+        <!-- LEFT PANEL: Notification Inbox (5 cols) -->
+        <section class="lg:col-span-5 flex flex-col light-card rounded-3xl overflow-hidden shadow-sm">
+            <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-white">
                 <div class="flex items-center space-x-2.5">
-                    <div class="w-3 h-3 bg-amber-400 rounded-full animate-ping"></div>
-                    <h2 class="font-bold text-slate-100 text-sm tracking-wide">수신된 알림 & 이벤트 피드</h2>
+                    <div class="w-3 h-3 bg-amber-500 rounded-full animate-pulse"></div>
+                    <h2 class="font-bold text-slate-900 text-sm tracking-wide">수신된 알림 & 이벤트 피드</h2>
                 </div>
-                <span id="inbox-count" class="bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold px-3 py-1 rounded-full">0건 대기</span>
+                <span id="inbox-count" class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full border border-amber-200">0건 대기</span>
             </div>
 
             <!-- Filter tabs for inbox -->
-            <div class="px-5 py-3 border-b border-slate-800/60 flex space-x-2 overflow-x-auto text-xs bg-slate-900/30">
+            <div class="px-5 py-3 border-b border-slate-100 flex space-x-2 overflow-x-auto text-xs bg-slate-50/50">
                 <button onclick="filterInbox('all')" id="inbox-filter-all" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 text-white font-bold transition whitespace-nowrap shadow-sm">전체</button>
-                <button onclick="filterInbox('축제')" id="inbox-filter-축제" class="px-3.5 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium transition whitespace-nowrap border border-slate-700/50">축제/행사</button>
-                <button onclick="filterInbox('시험')" id="inbox-filter-시험" class="px-3.5 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium transition whitespace-nowrap border border-slate-700/50">시험/평가</button>
-                <button onclick="filterInbox('동아리')" id="inbox-filter-동아리" class="px-3.5 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium transition whitespace-nowrap border border-slate-700/50">동아리</button>
-                <button onclick="filterInbox('행정')" id="inbox-filter-행정" class="px-3.5 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium transition whitespace-nowrap border border-slate-700/50">학교행정</button>
+                <button onclick="filterInbox('축제')" id="inbox-filter-축제" class="px-3.5 py-1.5 rounded-xl bg-white text-slate-600 hover:bg-slate-100 font-medium transition whitespace-nowrap border border-slate-200">축제/행사</button>
+                <button onclick="filterInbox('시험')" id="inbox-filter-시험" class="px-3.5 py-1.5 rounded-xl bg-white text-slate-600 hover:bg-slate-100 font-medium transition whitespace-nowrap border border-slate-200">시험/평가</button>
+                <button onclick="filterInbox('동아리')" id="inbox-filter-동아리" class="px-3.5 py-1.5 rounded-xl bg-white text-slate-600 hover:bg-slate-100 font-medium transition whitespace-nowrap border border-slate-200">동아리</button>
+                <button onclick="filterInbox('행정')" id="inbox-filter-행정" class="px-3.5 py-1.5 rounded-xl bg-white text-slate-600 hover:bg-slate-100 font-medium transition whitespace-nowrap border border-slate-200">학교행정</button>
             </div>
 
             <!-- Inbox list container -->
@@ -94,69 +90,77 @@
                 <!-- Dynamically populated inbox items -->
             </div>
             
-            <div class="p-3.5 bg-slate-900/60 border-t border-slate-800/80 text-center">
-                <p class="text-[11px] text-slate-400 font-medium">✨ 알림 내용을 확인하고 "기간 설정 및 등록"을 눌러 타임라인에 추가하세요.</p>
+            <div class="p-3.5 bg-slate-50 border-t border-slate-100 text-center">
+                <p class="text-[11px] text-slate-500 font-medium">✨ 알림 내용을 확인하고 "기간 설정 및 등록"을 눌러 타임라인에 추가하세요.</p>
             </div>
         </section>
 
-        <!-- RIGHT PANEL: Timeline, Month Navigation & Deadline Management (7 cols) -->
-        <section class="lg:col-span-7 flex flex-col glass-card rounded-3xl overflow-hidden shadow-2xl border border-slate-800">
-            <div class="p-5 border-b border-slate-800/80 flex items-center justify-between bg-slate-900/60">
+        <!-- RIGHT PANEL: Timeline with Yearly/Monthly/Weekly Mode Selector (7 cols) -->
+        <section class="lg:col-span-7 flex flex-col light-card rounded-3xl overflow-hidden shadow-sm">
+            <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-white">
                 <div class="flex items-center space-x-2.5">
-                    <div class="w-3 h-3 bg-indigo-500 rounded-full"></div>
-                    <h2 class="font-bold text-slate-100 text-sm tracking-wide">기간 설정 및 D-Day 타임라인</h2>
+                    <div class="w-3 h-3 bg-indigo-600 rounded-full"></div>
+                    <h2 class="font-bold text-slate-900 text-sm tracking-wide">기간 설정 및 D-Day 타임라인</h2>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <button onclick="openCustomAddModal()" class="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition shadow-md shadow-indigo-500/20 border border-indigo-400/30">
+                    <button onclick="openCustomAddModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition shadow-sm">
                         + 직접 일정 추가
                     </button>
                 </div>
             </div>
 
-            <!-- Month Navigation Bar -->
-            <div class="px-5 py-3 border-b border-slate-800/60 flex items-center justify-between bg-slate-900/40">
-                <div class="flex items-center space-x-3">
-                    <div class="flex items-center space-x-1.5 bg-slate-800/80 border border-slate-700/60 rounded-2xl p-1 shadow-inner">
-                        <button onclick="changeMonth(-1)" class="p-2 hover:bg-slate-700 rounded-xl text-indigo-300 transition" title="이전 달">
+            <!-- Timeline Mode Selector Bar (Yearly, Monthly, Weekly) -->
+            <div class="px-5 py-3 border-b border-slate-100 flex flex-wrap items-center justify-between gap-3 bg-slate-50/70">
+                <!-- View Mode Tabs -->
+                <div class="flex space-x-1 bg-slate-200/70 p-1 rounded-2xl">
+                    <button onclick="setTimelineView('yearly')" id="view-mode-yearly" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 transition">연간 (Year)</button>
+                    <button onclick="setTimelineView('monthly')" id="view-mode-monthly" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-indigo-600 shadow-sm transition">월간 (Month)</button>
+                    <button onclick="setTimelineView('weekly')" id="view-mode-weekly" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 transition">주간 (Week)</button>
+                </div>
+
+                <!-- Date Navigation Controls -->
+                <div class="flex items-center space-x-2">
+                    <div class="flex items-center space-x-1 bg-white border border-slate-200 rounded-2xl p-1 shadow-sm">
+                        <button onclick="navigateTime(-1)" class="p-1.5 hover:bg-slate-100 rounded-xl text-slate-600 transition" title="이전">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
                             </svg>
                         </button>
-                        <span id="current-month-display" class="px-4 font-black text-indigo-200 text-sm tracking-wide">2026년 9월</span>
-                        <button onclick="changeMonth(1)" class="p-2 hover:bg-slate-700 rounded-xl text-indigo-300 transition" title="다음 달">
+                        <span id="timeline-range-display" class="px-3 font-extrabold text-indigo-600 text-xs tracking-wide">2026년 9월</span>
+                        <button onclick="navigateTime(1)" class="p-1.5 hover:bg-slate-100 rounded-xl text-slate-600 transition" title="다음">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
                             </svg>
                         </button>
                     </div>
-                    <button onclick="resetToCurrentMonth()" class="text-xs font-bold text-slate-300 hover:text-white bg-slate-800/80 border border-slate-700/60 px-3 py-2.5 rounded-xl transition shadow-sm">이번 달</button>
-                </div>
-                <div class="flex space-x-1.5 text-xs">
-                    <button onclick="filterTimeline('all')" id="timeline-filter-all" class="px-3 py-1.5 rounded-xl bg-indigo-600 text-white font-bold transition shadow-sm">전체</button>
-                    <button onclick="filterTimeline('active')" id="timeline-filter-active" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 hover:bg-slate-700 font-medium transition border border-slate-700/50">진행중</button>
-                    <button onclick="filterTimeline('completed')" id="timeline-filter-completed" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 hover:bg-slate-700 font-medium transition border border-slate-700/50">완료</button>
+                    <button onclick="resetToCurrentDate()" class="text-xs font-bold text-slate-700 hover:bg-slate-100 bg-white border border-slate-200 px-3 py-2 rounded-xl transition shadow-sm">오늘</button>
                 </div>
             </div>
 
-            <div class="px-5 py-2 border-b border-slate-800/50 flex items-center justify-between text-xs bg-slate-900/20 text-slate-400 font-medium">
-                <span id="timeline-stats">선택 월 일정 0개</span>
-                <span class="text-[11px] text-indigo-300 font-bold">🎯 시작일 기준 D-Day 및 날짜 강조 모드</span>
+            <!-- Sub-filter (All / Active / Completed) -->
+            <div class="px-5 py-2.5 border-b border-slate-100 flex items-center justify-between text-xs bg-white text-slate-500 font-medium">
+                <span id="timeline-stats">해당 기간 일정 0개</span>
+                <div class="flex space-x-1.5 text-xs">
+                    <button onclick="filterTimeline('all')" id="timeline-filter-all" class="px-3 py-1 rounded-lg bg-indigo-600 text-white font-bold transition shadow-sm">전체</button>
+                    <button onclick="filterTimeline('active')" id="timeline-filter-active" class="px-3 py-1 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition">진행중</button>
+                    <button onclick="filterTimeline('completed')" id="timeline-filter-completed" class="px-3 py-1 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition">완료</button>
+                </div>
             </div>
 
             <!-- Timeline List Container -->
-            <div id="timeline-list" class="flex-1 overflow-y-auto p-4 space-y-4 max-h-[calc(100vh-340px)]">
+            <div id="timeline-list" class="flex-1 overflow-y-auto p-4 space-y-4 max-h-[calc(100vh-340px)] bg-slate-50/30">
                 <!-- Dynamically populated timeline items -->
             </div>
         </section>
 
     </main>
 
-    <!-- Modal: Setup Timeline Period for Inbox Item -->
-    <div id="setup-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl max-w-md w-full overflow-hidden transform transition-all glow-effect">
-            <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/80">
-                <h3 class="font-black text-slate-100 text-base">이벤트 기간 설정 및 등록</h3>
-                <button onclick="closeSetupModal()" class="text-slate-400 hover:text-white p-1 rounded-xl bg-slate-800/60">
+    <!-- Modal: Setup Timeline Period for Inbox Item / Custom Add -->
+    <div id="setup-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white border border-slate-200 rounded-3xl shadow-2xl max-w-md w-full overflow-hidden transform transition-all glow-effect">
+            <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-white">
+                <h3 class="font-black text-slate-900 text-base">이벤트 기간 설정 및 등록</h3>
+                <button onclick="closeSetupModal()" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-xl bg-slate-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -165,22 +169,22 @@
             <form id="setup-form" onsubmit="submitSetupForm(event)" class="p-6 space-y-4 text-xs">
                 <input type="hidden" id="modal-inbox-id">
                 <div>
-                    <label class="block font-bold text-slate-300 mb-1.5">이벤트명</label>
-                    <input type="text" id="modal-title" required class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-2xl text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium">
+                    <label class="block font-bold text-slate-700 mb-1.5">이벤트명</label>
+                    <input type="text" id="modal-title" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium">
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block font-bold text-indigo-300 mb-1.5">시작일 (D-Day 기준)</label>
-                        <input type="date" id="modal-start-date" required class="w-full px-3.5 py-2.5 bg-slate-800 border border-indigo-500/50 rounded-2xl text-indigo-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold">
+                        <label class="block font-bold text-indigo-700 mb-1.5">시작일 (D-Day 기준)</label>
+                        <input type="date" id="modal-start-date" required class="w-full px-3.5 py-2.5 bg-indigo-50/50 border border-indigo-200 rounded-2xl text-indigo-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold">
                     </div>
                     <div>
-                        <label class="block font-bold text-rose-300 mb-1.5">마감일</label>
-                        <input type="date" id="modal-end-date" required class="w-full px-3.5 py-2.5 bg-slate-800 border border-rose-500/50 rounded-2xl text-rose-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold">
+                        <label class="block font-bold text-rose-700 mb-1.5">마감일</label>
+                        <input type="date" id="modal-end-date" required class="w-full px-3.5 py-2.5 bg-rose-50/50 border border-rose-200 rounded-2xl text-rose-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold">
                     </div>
                 </div>
                 <div>
-                    <label class="block font-bold text-slate-300 mb-1.5">카테고리</label>
-                    <select id="modal-category" class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-2xl text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium">
+                    <label class="block font-bold text-slate-700 mb-1.5">카테고리</label>
+                    <select id="modal-category" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium">
                         <option value="축제">축제/행사</option>
                         <option value="시험">시험/평가</option>
                         <option value="동아리">동아리</option>
@@ -188,49 +192,14 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block font-bold text-slate-300 mb-1.5">상세 내용 및 준비 사항</label>
-                    <textarea id="modal-desc" rows="3" class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-2xl text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="준비물, 장소, 주의사항 등을 적어보세요..."></textarea>
+                    <label class="block font-bold text-slate-700 mb-1.5">상세 내용 및 준비 사항</label>
+                    <textarea id="modal-desc" rows="3" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="준비물, 장소, 주의사항 등을 적어보세요..."></textarea>
                 </div>
                 <div class="pt-2 flex space-x-3">
-                    <button type="button" onclick="closeSetupModal()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-3 rounded-2xl transition">취소</button>
-                    <button type="submit" class="flex-1 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold py-3 rounded-2xl transition shadow-lg shadow-indigo-500/30">타임라인에 추가</button>
+                    <button type="button" onclick="closeSetupModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-2xl transition">취소</button>
+                    <button type="submit" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-2xl transition shadow-md shadow-indigo-200">타임라인에 추가</button>
                 </div>
             </form>
-        </div>
-    </div>
-
-    <!-- Modal: Simulate Incoming Notification -->
-    <div id="simulation-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden transform transition-all glow-effect">
-            <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/80">
-                <h3 class="font-black text-slate-100 text-base">새 알림 수신 시뮬레이션</h3>
-                <button onclick="closeSimulationModal()" class="text-slate-400 hover:text-white p-1 rounded-xl bg-slate-800/60">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-            <div class="p-6 space-y-3 text-xs">
-                <p class="text-slate-400 leading-relaxed">학교 공지사항이나 알림톡으로 들어오는 가상의 이벤트를 선택해 즉시 수신함에 추가해보세요.</p>
-                <div class="space-y-2.5 pt-2">
-                    <button onclick="simulateReceive('2학기 기말고사 안내', '시험', '전학년 대상 체육관 및 각 교실 시행', '2026-10-15', '2026-10-22')" class="w-full text-left p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/60 hover:border-indigo-500 hover:bg-slate-800 transition flex items-center space-x-3 group">
-                        <span class="font-extrabold text-amber-300 bg-amber-500/20 px-2.5 py-1 rounded-xl">시험</span>
-                        <div class="flex-1"><div class="font-bold text-slate-200 group-hover:text-white">2학기 기말고사 일정 공지</div></div>
-                    </button>
-                    <button onclick="simulateReceive('교내 동아리 발표대회 및 전시', '동아리', '본관 중앙 로비 및 시청각실', '2026-10-01', '2026-10-10')" class="w-full text-left p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/60 hover:border-indigo-500 hover:bg-slate-800 transition flex items-center space-x-3 group">
-                        <span class="font-extrabold text-emerald-300 bg-emerald-500/20 px-2.5 py-1 rounded-xl">동아리</span>
-                        <div class="flex-1"><div class="font-bold text-slate-200 group-hover:text-white">교내 동아리 발표대회 참가</div></div>
-                    </button>
-                    <button onclick="simulateReceive('대동제 축제 장기자랑 예선', '축제', '학생회실 및 음악실 접수', '2026-09-25', '2026-09-30')" class="w-full text-left p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/60 hover:border-indigo-500 hover:bg-slate-800 transition flex items-center space-x-3 group">
-                        <span class="font-extrabold text-rose-300 bg-rose-500/20 px-2.5 py-1 rounded-xl">축제</span>
-                        <div class="flex-1"><div class="font-bold text-slate-200 group-hover:text-white">대동제 장기자랑 참가 신청</div></div>
-                    </button>
-                    <button onclick="simulateReceive('학생증 재발급 및 모바일 등록', '행정', '행정실 및 학생복지부', '2026-09-20', '2026-09-28')" class="w-full text-left p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/60 hover:border-indigo-500 hover:bg-slate-800 transition flex items-center space-x-3 group">
-                        <span class="font-extrabold text-sky-300 bg-sky-500/20 px-2.5 py-1 rounded-xl">행정</span>
-                        <div class="flex-1"><div class="font-bold text-slate-200 group-hover:text-white">학생증 모바일 등록 기간</div></div>
-                    </button>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -250,33 +219,79 @@
         let currentInboxFilter = 'all';
         let currentTimelineFilter = 'all';
 
-        // Calendar Month Navigation State (Default to September 2026)
-        let viewingYear = 2026;
-        let viewingMonth = 8; // September
+        // View Mode: 'yearly' | 'monthly' | 'weekly'
+        let currentViewMode = 'monthly';
+
+        // Navigation state anchor date (Default: 2026-09-18)
+        let anchorDate = new Date(2026, 8, 18); // September is month 8
 
         window.onload = function() {
             renderInbox();
             renderTimeline();
         };
 
-        // --- Month Navigation ---
-        function changeMonth(direction) {
-            viewingMonth += direction;
-            if (viewingMonth > 11) {
-                viewingMonth = 0;
-                viewingYear++;
-            } else if (viewingMonth < 0) {
-                viewingMonth = 11;
-                viewingYear--;
+        // --- View Mode & Navigation Functions ---
+        function setTimelineView(mode) {
+            currentViewMode = mode;
+            ['yearly', 'monthly', 'weekly'].forEach(m => {
+                const btn = document.getElementById(`view-mode-${m}`);
+                if (btn) {
+                    if (m === mode) {
+                        btn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-indigo-600 shadow-sm transition';
+                    } else {
+                        btn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 transition';
+                    }
+                }
+            });
+            renderTimeline();
+        }
+
+        function navigateTime(direction) {
+            if (currentViewMode === 'yearly') {
+                anchorDate.setFullYear(anchorDate.getFullYear() + direction);
+            } else if (currentViewMode === 'monthly') {
+                anchorDate.setMonth(anchorDate.getMonth() + direction);
+            } else if (currentViewMode === 'weekly') {
+                anchorDate.setDate(anchorDate.getDate() + (direction * 7));
             }
             renderTimeline();
         }
 
-        function resetToCurrentMonth() {
-            const now = new Date();
-            viewingYear = now.getFullYear();
-            viewingMonth = now.getMonth();
+        function resetToCurrentDate() {
+            anchorDate = new Date(2026, 8, 18);
             renderTimeline();
+        }
+
+        // Helper: Get start and end of week (Monday to Sunday)
+        function getWeekRange(date) {
+            const d = new Date(date);
+            const day = d.getDay();
+            const diffToMonday = d.getDate() - day + (day === 0 ? -6 : 1);
+            const monday = new Date(d.setDate(diffToMonday));
+            monday.setHours(0,0,0,0);
+            const sunday = new Date(monday);
+            sunday.setDate(monday.getDate() + 6);
+            sunday.setHours(23,59,59,999);
+            return { start: monday, end: sunday };
+        }
+
+        function updateRangeDisplay() {
+            const display = document.getElementById('timeline-range-display');
+            const y = anchorDate.getFullYear();
+            const m = anchorDate.getMonth() + 1;
+            
+            if (currentViewMode === 'yearly') {
+                display.textContent = `${y}년 (연간)`;
+            } else if (currentViewMode === 'monthly') {
+                display.textContent = `${y}년 ${m}월`;
+            } else if (currentViewMode === 'weekly') {
+                const { start, end } = getWeekRange(anchorDate);
+                const sMonth = start.getMonth() + 1;
+                const sDay = start.getDate();
+                const eMonth = end.getMonth() + 1;
+                const eDay = end.getDate();
+                display.textContent = `${sMonth}/${sDay} ~ ${eMonth}/${eDay}`;
+            }
         }
 
         // --- Inbox Functions ---
@@ -288,7 +303,7 @@
                     if (cat === category) {
                         btn.className = 'px-3.5 py-1.5 rounded-xl bg-indigo-600 text-white font-bold transition whitespace-nowrap shadow-sm';
                     } else {
-                        btn.className = 'px-3.5 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium transition whitespace-nowrap border border-slate-700/50';
+                        btn.className = 'px-3.5 py-1.5 rounded-xl bg-white text-slate-600 hover:bg-slate-100 font-medium transition whitespace-nowrap border border-slate-200';
                     }
                 }
             });
@@ -310,11 +325,11 @@
             if (filtered.length === 0) {
                 listContainer.innerHTML = `
                     <div class="text-center py-14">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-slate-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-slate-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                         </svg>
-                        <p class="text-xs font-semibold text-slate-400">수신된 신규 알림이 없습니다.</p>
-                        <p class="text-[11px] text-slate-500 mt-1">상단의 '새 알림 시뮬레이션'을 눌러 확인해보세요!</p>
+                        <p class="text-xs font-semibold text-slate-500">수신된 신규 알림이 없습니다.</p>
+                        <p class="text-[11px] text-slate-400 mt-1">우측에서 일정을 직접 추가하거나 관리해보세요!</p>
                     </div>
                 `;
                 return;
@@ -324,18 +339,18 @@
             filtered.forEach(item => {
                 const badgeColor = getCategoryColor(item.category);
                 const el = document.createElement('div');
-                el.className = 'bg-slate-900/80 hover:bg-slate-800/90 border border-slate-800 rounded-2xl p-4 transition shadow-md flex flex-col justify-between space-y-2.5 group';
+                el.className = 'bg-white hover:border-indigo-300 border border-slate-200 rounded-2xl p-4 transition shadow-sm flex flex-col justify-between space-y-2.5 group';
                 el.innerHTML = `
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-extrabold px-3 py-1 rounded-full ${badgeColor}">${item.category}</span>
-                        <span class="text-xs font-black text-slate-300 bg-slate-800 px-2.5 py-1 rounded-xl border border-slate-700/60">수신: ${item.dateDetected}</span>
+                        <span class="text-xs font-black text-slate-600 bg-slate-100 px-2.5 py-1 rounded-xl border border-slate-200">수신: ${item.dateDetected}</span>
                     </div>
                     <div>
-                        <h4 class="font-bold text-slate-100 text-sm group-hover:text-indigo-300 transition">${item.title}</h4>
-                        <p class="text-xs text-slate-400 mt-1 line-clamp-2">${item.desc}</p>
+                        <h4 class="font-bold text-slate-900 text-sm group-hover:text-indigo-600 transition">${item.title}</h4>
+                        <p class="text-xs text-slate-500 mt-1 line-clamp-2">${item.desc}</p>
                     </div>
-                    <div class="pt-2 flex justify-end border-t border-slate-800">
-                        <button onclick="openSetupModalWithItem(${item.id})" class="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-xs font-bold py-2.5 px-3 rounded-xl transition shadow-md flex items-center justify-center space-x-1.5">
+                    <div class="pt-2 flex justify-end border-t border-slate-100">
+                        <button onclick="openSetupModalWithItem(${item.id})" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2.5 px-3 rounded-xl transition shadow-sm flex items-center justify-center space-x-1.5">
                             <span>기간 설정 및 등록</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
@@ -347,51 +362,28 @@
             });
         }
 
-        // --- Simulation Modal ---
-        function openSimulationModal() {
-            document.getElementById('simulation-modal').classList.remove('hidden');
-        }
-        function closeSimulationModal() {
-            document.getElementById('simulation-modal').classList.add('hidden');
-        }
-        function simulateReceive(title, category, desc, defaultStart, defaultEnd) {
-            const newItem = {
-                id: Date.now(),
-                title: title,
-                category: category,
-                desc: desc,
-                dateDetected: new Date().toISOString().split('T')[0],
-                defaultStart: defaultStart,
-                defaultEnd: defaultEnd,
-                isProcessed: false
-            };
-            inboxItems.unshift(newItem);
-            closeSimulationModal();
-            renderInbox();
+        // --- Custom Add Modal ---
+        function openCustomAddModal() {
+            document.getElementById('modal-inbox-id').value = '';
+            document.getElementById('modal-title').value = '';
+            document.getElementById('modal-start-date').value = '2026-09-18';
+            document.getElementById('modal-end-date').value = '2026-09-25';
+            document.getElementById('modal-category').value = '행정';
+            document.getElementById('modal-desc').value = '';
+
+            document.getElementById('setup-modal').classList.remove('hidden');
         }
 
-        // --- Setup Modal ---
         function openSetupModalWithItem(id) {
             const item = inboxItems.find(i => i.id === id);
             if (!item) return;
 
             document.getElementById('modal-inbox-id').value = item.id;
             document.getElementById('modal-title').value = item.title;
-            document.getElementById('modal-start-date').value = item.defaultStart || new Date().toISOString().split('T')[0];
-            document.getElementById('modal-end-date').value = item.defaultEnd || new Date().toISOString().split('T')[0];
+            document.getElementById('modal-start-date').value = item.defaultStart || '2026-09-18';
+            document.getElementById('modal-end-date').value = item.defaultEnd || '2026-09-25';
             document.getElementById('modal-category').value = item.category;
             document.getElementById('modal-desc').value = item.desc;
-
-            document.getElementById('setup-modal').classList.remove('hidden');
-        }
-
-        function openCustomAddModal() {
-            document.getElementById('modal-inbox-id').value = '';
-            document.getElementById('modal-title').value = '';
-            document.getElementById('modal-start-date').value = new Date().toISOString().split('T')[0];
-            document.getElementById('modal-end-date').value = new Date(Date.now() + 7*86400000).toISOString().split('T')[0];
-            document.getElementById('modal-category').value = '행정';
-            document.getElementById('modal-desc').value = '';
 
             document.getElementById('setup-modal').classList.remove('hidden');
         }
@@ -442,9 +434,9 @@
                 const btn = document.getElementById(`timeline-filter-${f}`);
                 if (btn) {
                     if (f === filter) {
-                        btn.className = 'px-3 py-1.5 rounded-xl bg-indigo-600 text-white font-bold transition shadow-sm';
+                        btn.className = 'px-3 py-1 rounded-lg bg-indigo-600 text-white font-bold transition shadow-sm';
                     } else {
-                        btn.className = 'px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 hover:bg-slate-700 font-medium transition border border-slate-700/50';
+                        btn.className = 'px-3 py-1 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition';
                     }
                 }
             });
@@ -462,7 +454,7 @@
         }
 
         function calculateDday(startDateStr) {
-            const today = new Date();
+            const today = new Date(2026, 8, 18);
             today.setHours(0, 0, 0, 0);
             const target = new Date(startDateStr);
             target.setHours(0, 0, 0, 0);
@@ -476,10 +468,14 @@
         }
 
         function renderTimeline() {
-            document.getElementById('current-month-display').textContent = `${viewingYear}년 ${viewingMonth + 1}월`;
+            updateRangeDisplay();
 
             const listContainer = document.getElementById('timeline-list');
             const stats = document.getElementById('timeline-stats');
+
+            const viewingYear = anchorDate.getFullYear();
+            const viewingMonth = anchorDate.getMonth();
+            const { start: weekStart, end: weekEnd } = getWeekRange(anchorDate);
 
             const filtered = timelineItems.filter(item => {
                 if (currentTimelineFilter === 'active' && item.completed) return false;
@@ -487,27 +483,32 @@
 
                 const start = new Date(item.startDate);
                 const end = new Date(item.endDate);
-                
-                const startMatch = start.getFullYear() === viewingYear && start.getMonth() === viewingMonth;
-                const endMatch = end.getFullYear() === viewingYear && end.getMonth() === viewingMonth;
-                
-                const viewingDateObj = new Date(viewingYear, viewingMonth, 1);
-                const viewingEndObj = new Date(viewingYear, viewingMonth + 1, 0);
-                const spansMonth = start <= viewingEndObj && end >= viewingDateObj;
 
-                return startMatch || endMatch || spansMonth;
+                if (currentViewMode === 'yearly') {
+                    return start.getFullYear() === viewingYear || end.getFullYear() === viewingYear || (start <= new Date(viewingYear, 11, 31) && end >= new Date(viewingYear, 0, 1));
+                } else if (currentViewMode === 'monthly') {
+                    const startMatch = start.getFullYear() === viewingYear && start.getMonth() === viewingMonth;
+                    const endMatch = end.getFullYear() === viewingYear && end.getMonth() === viewingMonth;
+                    const viewingDateObj = new Date(viewingYear, viewingMonth, 1);
+                    const viewingEndObj = new Date(viewingYear, viewingMonth + 1, 0);
+                    const spansMonth = start <= viewingEndObj && end >= viewingDateObj;
+                    return startMatch || endMatch || spansMonth;
+                } else if (currentViewMode === 'weekly') {
+                    return start <= weekEnd && end >= weekStart;
+                }
+                return true;
             });
 
-            stats.textContent = `${viewingYear}년 ${viewingMonth + 1}월 관련 일정 ${filtered.length}개`;
+            stats.textContent = `해당 기간 일정 ${filtered.length}개`;
 
             if (filtered.length === 0) {
                 listContainer.innerHTML = `
                     <div class="text-center py-20">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 mx-auto text-slate-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 mx-auto text-slate-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
-                        <p class="text-xs font-semibold text-slate-400">${viewingYear}년 ${viewingMonth + 1}월에 등록된 일정이 없습니다.</p>
-                        <p class="text-[11px] text-slate-500 mt-1">상단의 화살표를 눌러 다른 달을 확인하거나 좌측에서 일정을 등록해보세요.</p>
+                        <p class="text-xs font-semibold text-slate-500">선택한 기간에 등록된 일정이 없습니다.</p>
+                        <p class="text-[11px] text-slate-400 mt-1">상단의 화살표로 기간을 이동하거나 일정을 추가해보세요.</p>
                     </div>
                 `;
                 return;
@@ -521,17 +522,17 @@
                 const ddayText = calculateDday(item.startDate);
                 const isUrgent = ddayText.includes('D-') && parseInt(ddayText.replace(/[^0-9]/g, '')) <= 3;
                 
-                let ddayBadgeClass = 'bg-slate-800 text-slate-300 text-sm px-3.5 py-1.5 border border-slate-700';
+                let ddayBadgeClass = 'bg-slate-100 text-slate-700 text-sm px-3.5 py-1.5 border border-slate-200';
                 if (item.completed) {
-                    ddayBadgeClass = 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs px-3 py-1';
+                    ddayBadgeClass = 'bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs px-3 py-1 font-bold';
                 } else if (ddayText.includes('D-DAY') || isUrgent) {
-                    ddayBadgeClass = 'bg-gradient-to-r from-rose-600 to-pink-600 text-white text-base px-4 py-1.5 animate-pulse font-black shadow-lg shadow-rose-500/30';
+                    ddayBadgeClass = 'bg-rose-600 text-white text-base px-4 py-1.5 animate-pulse font-black shadow-md shadow-rose-200';
                 } else {
-                    ddayBadgeClass = 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 text-sm px-3.5 py-1.5 font-black';
+                    ddayBadgeClass = 'bg-indigo-100 text-indigo-800 border border-indigo-200 text-sm px-3.5 py-1.5 font-black';
                 }
 
                 const el = document.createElement('div');
-                el.className = `border rounded-3xl p-5 transition ${item.completed ? 'bg-slate-900/40 border-slate-800/80 opacity-70' : 'bg-slate-900/90 border-slate-800 shadow-xl hover:border-indigo-500/50'}`;
+                el.className = `border rounded-3xl p-5 transition ${item.completed ? 'bg-white opacity-60 border-slate-200' : 'bg-white shadow-sm border-slate-200 hover:border-indigo-300'}`;
                 
                 el.innerHTML = `
                     <div class="flex items-center justify-between">
@@ -540,10 +541,10 @@
                             <span class="rounded-2xl tracking-wide ${ddayBadgeClass}">${item.completed ? '완료됨' : ddayText}</span>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <button onclick="toggleCompleteTimeline(${item.id})" class="text-xs px-3.5 py-2 rounded-xl border font-bold transition ${item.completed ? 'bg-slate-800 text-slate-300 border-slate-700' : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 hover:bg-emerald-500/30'}">
+                            <button onclick="toggleCompleteTimeline(${item.id})" class="text-xs px-3.5 py-2 rounded-xl border font-bold transition ${item.completed ? 'bg-slate-100 text-slate-600 border-slate-200' : 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'}">
                                 ${item.completed ? '다시 진행' : '완료하기'}
                             </button>
-                            <button onclick="deleteTimeline(${item.id})" class="p-2 text-slate-400 hover:text-rose-400 rounded-xl hover:bg-slate-800 transition" title="삭제">
+                            <button onclick="deleteTimeline(${item.id})" class="p-2 text-slate-400 hover:text-rose-600 rounded-xl hover:bg-slate-100 transition" title="삭제">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                 </svg>
@@ -551,17 +552,17 @@
                         </div>
                     </div>
                     <div class="mt-4">
-                        <h4 class="font-bold text-slate-100 text-base ${item.completed ? 'line-through text-slate-500' : ''}">${item.title}</h4>
-                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">${item.desc}</p>
+                        <h4 class="font-bold text-slate-900 text-base ${item.completed ? 'line-through text-slate-400' : ''}">${item.title}</h4>
+                        <p class="text-xs text-slate-500 mt-1 leading-relaxed">${item.desc}</p>
                     </div>
-                    <div class="mt-4 pt-3.5 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
-                        <div class="flex items-center space-x-2 font-extrabold text-indigo-300 bg-indigo-950/50 px-3.5 py-2.5 rounded-2xl border border-indigo-500/30">
+                    <div class="mt-4 pt-3.5 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                        <div class="flex items-center space-x-2 font-extrabold text-indigo-700 bg-indigo-50/70 px-3.5 py-2.5 rounded-2xl border border-indigo-100">
                             <span>🚀 시작일:</span>
-                            <span class="text-sm font-black text-white">${item.startDate}</span>
+                            <span class="text-sm font-black text-indigo-900">${item.startDate}</span>
                         </div>
-                        <div class="flex items-center space-x-2 font-extrabold text-rose-300 bg-rose-950/50 px-3.5 py-2.5 rounded-2xl border border-rose-500/30">
+                        <div class="flex items-center space-x-2 font-extrabold text-rose-700 bg-rose-50/70 px-3.5 py-2.5 rounded-2xl border border-rose-100">
                             <span>🏁 마감일:</span>
-                            <span class="text-sm font-black text-white">${item.endDate}</span>
+                            <span class="text-sm font-black text-rose-900">${item.endDate}</span>
                         </div>
                     </div>
                 `;
@@ -571,11 +572,11 @@
 
         function getCategoryColor(cat) {
             switch(cat) {
-                case '축제': return 'bg-rose-500/20 text-rose-300 border border-rose-500/30';
-                case '시험': return 'bg-amber-500/20 text-amber-300 border border-amber-500/30';
-                case '동아리': return 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
-                case '행정': return 'bg-sky-500/20 text-sky-300 border border-sky-500/30';
-                default: return 'bg-slate-800 text-slate-300 border border-slate-700';
+                case '축제': return 'bg-rose-100 text-rose-700 border border-rose-200';
+                case '시험': return 'bg-amber-100 text-amber-800 border border-amber-200';
+                case '동아리': return 'bg-emerald-100 text-emerald-800 border border-emerald-200';
+                case '행정': return 'bg-sky-100 text-sky-800 border border-sky-200';
+                default: return 'bg-slate-100 text-slate-700 border border-slate-200';
             }
         }
     </script>
