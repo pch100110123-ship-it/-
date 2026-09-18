@@ -7,7 +7,7 @@
     <!-- Tailwind CSS for modern responsive styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Inter Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
         /* Custom scrollbar for clean dashboard look */
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="flex items-center space-x-3">
-                <button onclick="openSimulationModal()" class="inline-flex items-center space-x-2 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 px-4 py-2 rounded-xl text-sm font-semibold transition border border-indigo-200">
+                <button onclick="openSimulationModal()" class="inline-flex items-center space-x-2 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 px-4 py-2 rounded-xl text-sm font-semibold transition border border-indigo-200 shadow-xs">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.655V5a2 2 0 10-4 0v.345C7.670.765 6 3.122 6 6v8.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                     </svg>
@@ -80,11 +80,11 @@
             </div>
             
             <div class="p-3 bg-slate-50 border-t border-slate-100 text-center">
-                <p class="text-xs text-slate-400">카드를 클릭하거나 "기간 설정 및 등록"을 눌러 오른쪽에 일정으로 추가하세요.</p>
+                <p class="text-xs text-slate-400">이벤트를 확인하고 "기간 설정 및 등록"을 눌러 오른쪽에 일정으로 추가하세요.</p>
             </div>
         </section>
 
-        <!-- RIGHT PANEL: Timeline & Deadline Management (7 cols) -->
+        <!-- RIGHT PANEL: Timeline, Month Navigation & Deadline Management (7 cols) -->
         <section class="lg:col-span-7 flex flex-col bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
             <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
                 <div class="flex items-center space-x-2">
@@ -98,18 +98,36 @@
                 </div>
             </div>
 
-            <!-- Timeline filters & stats -->
-            <div class="px-5 py-3 border-b border-slate-100 flex items-center justify-between text-xs bg-white">
-                <div class="flex space-x-2">
-                    <button onclick="filterTimeline('all')" id="timeline-filter-all" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-medium transition">전체 보기</button>
-                    <button onclick="filterTimeline('active')" id="timeline-filter-active" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition">진행 중</button>
-                    <button onclick="filterTimeline('completed')" id="timeline-filter-completed" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition">완료됨</button>
+            <div class="px-5 py-3 border-b border-slate-100 flex items-center justify-between bg-indigo-50/30">
+                <div class="flex items-center space-x-3">
+                    <div class="flex items-center space-x-1 bg-white border border-slate-200 rounded-xl p-1 shadow-xs">
+                        <button onclick="changeMonth(-1)" class="p-1.5 hover:bg-slate-100 rounded-lg text-slate-600 transition" title="이전 달">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <span id="current-month-display" class="px-3 font-extrabold text-indigo-900 text-sm">2026년 9월</span>
+                        <button onclick="changeMonth(1)" class="p-1.5 hover:bg-slate-100 rounded-lg text-slate-600 transition" title="다음 달">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <button onclick="resetToCurrentMonth()" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 bg-white border border-indigo-200 px-2.5 py-2 rounded-xl shadow-xs transition">오늘 월</button>
                 </div>
-                <span id="timeline-stats" class="text-slate-500 font-medium">총 0개 일정 관리 중</span>
+                <div class="flex space-x-1.5 text-xs">
+                    <button onclick="filterTimeline('all')" id="timeline-filter-all" class="px-2.5 py-1.5 rounded-lg bg-indigo-600 text-white font-medium transition">전체</button>
+                    <button onclick="filterTimeline('active')" id="timeline-filter-active" class="px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition">진행중</button>
+                    <button onclick="filterTimeline('completed')" id="timeline-filter-completed" class="px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition">완료</button>
+                </div>
             </div>
 
-            <!-- Timeline / Deadline Cards container -->
-            <div id="timeline-list" class="flex-1 overflow-y-auto p-4 space-y-4 max-h-[calc(100vh-280px)]">
+            <div class="px-5 py-2 border-b border-slate-100 flex items-center justify-between text-xs bg-white text-slate-500 font-medium">
+                <span id="timeline-stats">선택 월 일정 0개</span>
+                <span class="text-[11px] text-indigo-600 font-bold">💡 날짜와 마감기한(D-Day)을 크게 강조했습니다</span>
+            </div>
+
+            <div id="timeline-list" class="flex-1 overflow-y-auto p-4 space-y-4 max-h-[calc(100vh-330px)]">
                 <!-- Dynamically populated timeline items -->
             </div>
         </section>
@@ -136,11 +154,11 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-600 mb-1">시작일</label>
-                        <input type="date" id="modal-start-date" required class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <input type="date" id="modal-start-date" required class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold text-indigo-900">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-600 mb-1">마감일 (D-Day 기준)</label>
-                        <input type="date" id="modal-end-date" required class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <input type="date" id="modal-end-date" required class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold text-rose-900">
                     </div>
                 </div>
                 <div>
@@ -210,11 +228,35 @@
         let currentInboxFilter = 'all';
         let currentTimelineFilter = 'all';
 
+        // Calendar Month Navigation State (Default to September 2026)
+        let viewingYear = 2026;
+        let viewingMonth = 8; // 0-indexed (8 = September)
+
         // Initialize App on Load
         window.onload = function() {
             renderInbox();
             renderTimeline();
         };
+
+        // --- Month Navigation Functions ---
+        function changeMonth(direction) {
+            viewingMonth += direction;
+            if (viewingMonth > 11) {
+                viewingMonth = 0;
+                viewingYear++;
+            } else if (viewingMonth < 0) {
+                viewingMonth = 11;
+                viewingYear--;
+            }
+            renderTimeline();
+        }
+
+        function resetToCurrentMonth() {
+            const now = new Date();
+            viewingYear = now.getFullYear();
+            viewingMonth = now.getMonth();
+            renderTimeline();
+        }
 
         // --- Inbox Functions ---
         function filterInbox(category) {
@@ -265,17 +307,18 @@
                 el.innerHTML = `
                     <div class="flex items-start justify-between">
                         <span class="text-xs font-bold px-2.5 py-0.5 rounded-full ${badgeColor}">${item.category}</span>
-                        <span class="text-[11px] text-slate-400">수신: ${item.dateDetected}</span>
+                        <!-- 날짜가 가장 중요하므로 수신일 표시도 굵고 또렷하게 표시 -->
+                        <span class="text-xs font-bold text-slate-600 bg-white px-2 py-0.5 rounded border border-slate-200">수신: ${item.dateDetected}</span>
                     </div>
                     <div>
                         <h4 class="font-bold text-slate-800 text-sm">${item.title}</h4>
                         <p class="text-xs text-slate-600 mt-1 line-clamp-2">${item.desc}</p>
                     </div>
-                    <div class="pt-2 flex justify-end space-x-2 border-t border-slate-200/60">
-                        <button onclick="dismissInbox(${item.id})" class="text-xs text-slate-500 hover:text-slate-700 px-2.5 py-1 rounded font-medium transition">숨기기</button>
-                        <button onclick="openSetupModalWithItem(${item.id})" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow-sm flex items-center space-x-1">
+                    <!-- 숨기기 버튼 제거 완료 -->
+                    <div class="pt-2 flex justify-end border-t border-slate-200/60">
+                        <button onclick="openSetupModalWithItem(${item.id})" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2 px-3 rounded-lg transition shadow-sm flex items-center justify-center space-x-1.5">
                             <span>기간 설정 및 등록</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                             </svg>
                         </button>
@@ -283,11 +326,6 @@
                 `;
                 listContainer.appendChild(el);
             });
-        }
-
-        function dismissInbox(id) {
-            inboxItems = inboxItems.map(item => item.id === id ? {...item, isProcessed: true} : item);
-            renderInbox();
         }
 
         // --- Simulation Modal Functions ---
@@ -385,9 +423,9 @@
                 const btn = document.getElementById(`timeline-filter-${f}`);
                 if (btn) {
                     if (f === filter) {
-                        btn.className = 'px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-medium transition';
+                        btn.className = 'px-2.5 py-1.5 rounded-lg bg-indigo-600 text-white font-medium transition';
                     } else {
-                        btn.className = 'px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition';
+                        btn.className = 'px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition';
                     }
                 }
             });
@@ -419,25 +457,43 @@
         }
 
         function renderTimeline() {
+            // Update Header Month Display
+            document.getElementById('current-month-display').textContent = `${viewingYear}년 ${viewingMonth + 1}월`;
+
             const listContainer = document.getElementById('timeline-list');
             const stats = document.getElementById('timeline-stats');
 
+            // Filter items that overlap with the currently viewed month/year or match filter tabs
             const filtered = timelineItems.filter(item => {
-                if (currentTimelineFilter === 'active') return !item.completed;
-                if (currentTimelineFilter === 'completed') return item.completed;
-                return true;
+                // Check status filter
+                if (currentTimelineFilter === 'active' && item.completed) return false;
+                if (currentTimelineFilter === 'completed' && !item.completed) return false;
+
+                // Check if the event's start or end month matches the viewing month/year
+                const start = new Date(item.startDate);
+                const end = new Date(item.endDate);
+                
+                const startMatch = start.getFullYear() === viewingYear && start.getMonth() === viewingMonth;
+                const endMatch = end.getFullYear() === viewingYear && end.getMonth() === viewingMonth;
+                
+                // Also include if the current viewing month is between start and end
+                const viewingDateObj = new Date(viewingYear, viewingMonth, 1);
+                const viewingEndObj = new Date(viewingYear, viewingMonth + 1, 0);
+                const spansMonth = start <= viewingEndObj && end >= viewingDateObj;
+
+                return startMatch || endMatch || spansMonth;
             });
 
-            stats.textContent = `총 ${timelineItems.length}개 일정 중 완료 ${timelineItems.filter(i => i.completed).length}개`;
+            stats.textContent = `${viewingYear}년 ${viewingMonth + 1}월 관련 일정 ${filtered.length}개`;
 
             if (filtered.length === 0) {
                 listContainer.innerHTML = `
                     <div class="text-center py-16">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-slate-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
-                        <p class="text-sm font-medium text-slate-500">등록된 기간 관리 일정이 없습니다.</p>
-                        <p class="text-xs text-slate-400 mt-1">왼쪽 피드에서 '기간 설정 및 등록'을 눌러 일정을 추가해보세요.</p>
+                        <p class="text-sm font-medium text-slate-500">${viewingYear}년 ${viewingMonth + 1}월에 등록된 일정이 없습니다.</p>
+                        <p class="text-xs text-slate-400 mt-1">상단의 화살표를 눌러 다른 달을 확인하거나 좌측에서 일정을 등록해보세요.</p>
                     </div>
                 `;
                 return;
@@ -452,43 +508,46 @@
                 const ddayText = calculateDday(item.endDate);
                 const isUrgent = ddayText.startsWith('D-') && parseInt(ddayText.replace('D-', '')) <= 3;
                 
-                let ddayBadgeClass = 'bg-slate-100 text-slate-700';
+                let ddayBadgeClass = 'bg-slate-100 text-slate-700 text-base px-3 py-1';
                 if (item.completed) {
-                    ddayBadgeClass = 'bg-emerald-100 text-emerald-800';
+                    ddayBadgeClass = 'bg-emerald-100 text-emerald-800 text-sm px-2.5 py-1';
                 } else if (ddayText === 'D-DAY' || isUrgent) {
-                    ddayBadgeClass = 'bg-rose-100 text-rose-800 animate-pulse font-bold';
+                    ddayBadgeClass = 'bg-rose-600 text-white text-lg px-3.5 py-1.5 animate-pulse font-extrabold shadow-md';
+                } else {
+                    ddayBadgeClass = 'bg-indigo-100 text-indigo-900 text-base px-3 py-1 font-bold';
                 }
 
                 const el = document.createElement('div');
                 el.className = `border rounded-2xl p-4 transition ${item.completed ? 'bg-slate-50 border-slate-200 opacity-75' : 'bg-white border-slate-200 shadow-xs hover:shadow-md'}`;
                 
                 el.innerHTML = `
-                    <div class="flex items-start justify-between">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full ${badgeColor}">${item.category}</span>
-                            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full ${ddayBadgeClass}">${item.completed ? '완료됨' : ddayText}</span>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="text-xs font-bold px-2.5 py-1 rounded-full ${badgeColor}">${item.category}</span>
+                            <!-- 날짜가 가장 중요하므로 D-Day 뱃지를 훨씬 크고 눈에 띄게 강조 -->
+                            <span class="rounded-xl font-extrabold tracking-wide ${ddayBadgeClass}">${item.completed ? '완료됨' : ddayText}</span>
                         </div>
-                        <div class="flex items-center space-x-1">
-                            <button onclick="toggleCompleteTimeline(${item.id})" class="text-xs px-2.5 py-1 rounded-lg border font-semibold transition ${item.completed ? 'bg-slate-200 text-slate-700 border-slate-300' : 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'}">
+                        <div class="flex items-center space-x-1.5">
+                            <button onclick="toggleCompleteTimeline(${item.id})" class="text-xs px-3 py-1.5 rounded-xl border font-bold transition ${item.completed ? 'bg-slate-200 text-slate-700 border-slate-300' : 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'}">
                                 ${item.completed ? '다시 진행' : '완료하기'}
                             </button>
-                            <button onclick="deleteTimeline(${item.id})" class="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg transition" title="삭제">
+                            <button onclick="deleteTimeline(${item.id})" class="p-2 text-slate-400 hover:text-rose-600 rounded-xl transition" title="삭제">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                 </svg>
                             </button>
                         </div>
                     </div>
-                    <div class="mt-3">
-                        <h4 class="font-bold text-slate-800 text-base ${item.completed ? 'line-through text-slate-400' : ''}">${item.title}</h4>
+                    <div class="mt-3.5">
+                        <h4 class="font-bold text-slate-900 text-base ${item.completed ? 'line-through text-slate-400' : ''}">${item.title}</h4>
                         <p class="text-xs text-slate-600 mt-1">${item.desc}</p>
                     </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div class="flex items-center space-x-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                        <div class="flex items-center space-x-1.5 font-bold text-slate-800 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200/80">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
-                            <span>기한: ${item.startDate} ~ ${item.endDate}</span>
+                            <span>기간: ${item.startDate} ~ ${item.endDate}</span>
                         </div>
                     </div>
                 `;
