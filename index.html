@@ -3,48 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>학교 이벤트 & 기한 관리 허브</title>
-    <!-- Tailwind CSS for modern responsive styling -->
+    <title>학교알리미 - 고등학교 일정 & D-Day 허브</title>
+    <!-- Tailwind CSS with modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Inter Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Pretendard & Inter fonts -->
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        /* Custom scrollbar for clean dashboard look */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+        body { font-family: 'Pretendard', sans-serif; }
+        /* Custom smooth scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
+        
+        .glass-card {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
+        .glass-header {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
+        .glow-effect {
+            box-shadow: 0 0 25px -5px rgba(129, 140, 248, 0.25);
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
+    <!-- HEADER -->
+    <header class="glass-header sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between py-3">
+            <div class="flex items-center space-x-3.5">
+                <div class="relative">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl blur opacity-70 animate-pulse"></div>
+                    <div class="relative bg-slate-900 text-indigo-400 p-2.5 rounded-2xl border border-indigo-500/30 shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
                 </div>
                 <div>
-                    <h1 class="text-lg font-bold text-slate-900 tracking-tight">스쿨이벤트 허브</h1>
-                    <p class="text-xs text-slate-500">자동 알림 정리 및 기한(D-Day) 통합 관리 시스템</p>
+                    <div class="flex items-center space-x-2">
+                        <h1 class="text-xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400">학교알리미</h1>
+                        <span class="bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-[10px] font-extrabold px-2 py-0.5 rounded-full">v2.5 PRO</span>
+                    </div>
+                    <p class="text-xs text-slate-400 font-medium mt-0.5">고등학생을 위한 스마트 알림 & D-Day 캘린더 허브</p>
                 </div>
             </div>
+            
             <div class="flex items-center space-x-3">
-                <button onclick="openSimulationModal()" class="inline-flex items-center space-x-2 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 px-4 py-2 rounded-xl text-sm font-semibold transition border border-indigo-200 shadow-xs">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button onclick="openSimulationModal()" class="group relative inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white px-4 py-2.5 rounded-2xl text-xs font-bold transition shadow-lg shadow-indigo-500/25 border border-indigo-400/30 active:scale-95">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-200 group-hover:rotate-12 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.655V5a2 2 0 10-4 0v.345C7.670.765 6 3.122 6 6v8.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                     </svg>
                     <span>새 알림 시뮬레이션</span>
@@ -53,81 +67,84 @@
         </div>
     </header>
 
+    <!-- MAIN DASHBOARD -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
         <!-- LEFT PANEL: Auto-organized notifications & incoming events (5 cols) -->
-        <section class="lg:col-span-5 flex flex-col bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-            <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                <div class="flex items-center space-x-2">
-                    <div class="w-3 h-3 bg-amber-500 rounded-full animate-pulse"></div>
-                    <h2 class="font-bold text-slate-800 text-base">수신된 알림 & 이벤트 피드</h2>
+        <section class="lg:col-span-5 flex flex-col glass-card rounded-3xl overflow-hidden shadow-2xl border border-slate-800">
+            <div class="p-5 border-b border-slate-800/80 flex items-center justify-between bg-slate-900/60">
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-3 h-3 bg-amber-400 rounded-full animate-ping"></div>
+                    <h2 class="font-bold text-slate-100 text-sm tracking-wide">수신된 알림 & 이벤트 피드</h2>
                 </div>
-                <span id="inbox-count" class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-full">0건 대기</span>
+                <span id="inbox-count" class="bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold px-3 py-1 rounded-full">0건 대기</span>
             </div>
 
             <!-- Filter tabs for inbox -->
-            <div class="px-5 py-3 border-b border-slate-100 flex space-x-2 overflow-x-auto text-xs">
-                <button onclick="filterInbox('all')" id="inbox-filter-all" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white font-medium transition whitespace-nowrap">전체</button>
-                <button onclick="filterInbox('축제')" id="inbox-filter-축제" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition whitespace-nowrap">축제/행사</button>
-                <button onclick="filterInbox('시험')" id="inbox-filter-시험" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition whitespace-nowrap">시험/평가</button>
-                <button onclick="filterInbox('동아리')" id="inbox-filter-동아리" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition whitespace-nowrap">동아리</button>
-                <button onclick="filterInbox('행정')" id="inbox-filter-행정" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition whitespace-nowrap">학교행정</button>
+            <div class="px-5 py-3 border-b border-slate-800/60 flex space-x-2 overflow-x-auto text-xs bg-slate-900/30">
+                <button onclick="filterInbox('all')" id="inbox-filter-all" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 text-white font-bold transition whitespace-nowrap shadow-sm">전체</button>
+                <button onclick="filterInbox('축제')" id="inbox-filter-축제" class="px-3.5 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium transition whitespace-nowrap border border-slate-700/50">축제/행사</button>
+                <button onclick="filterInbox('시험')" id="inbox-filter-시험" class="px-3.5 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium transition whitespace-nowrap border border-slate-700/50">시험/평가</button>
+                <button onclick="filterInbox('동아리')" id="inbox-filter-동아리" class="px-3.5 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium transition whitespace-nowrap border border-slate-700/50">동아리</button>
+                <button onclick="filterInbox('행정')" id="inbox-filter-행정" class="px-3.5 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium transition whitespace-nowrap border border-slate-700/50">학교행정</button>
             </div>
 
             <!-- Inbox list container -->
-            <div id="inbox-list" class="flex-1 overflow-y-auto p-4 space-y-3 max-h-[calc(100vh-280px)]">
+            <div id="inbox-list" class="flex-1 overflow-y-auto p-4 space-y-3.5 max-h-[calc(100vh-290px)]">
                 <!-- Dynamically populated inbox items -->
             </div>
             
-            <div class="p-3 bg-slate-50 border-t border-slate-100 text-center">
-                <p class="text-xs text-slate-400">이벤트를 확인하고 "기간 설정 및 등록"을 눌러 오른쪽에 일정으로 추가하세요.</p>
+            <div class="p-3.5 bg-slate-900/60 border-t border-slate-800/80 text-center">
+                <p class="text-[11px] text-slate-400 font-medium">✨ 알림 내용을 확인하고 "기간 설정 및 등록"을 눌러 타임라인에 추가하세요.</p>
             </div>
         </section>
 
         <!-- RIGHT PANEL: Timeline, Month Navigation & Deadline Management (7 cols) -->
-        <section class="lg:col-span-7 flex flex-col bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-            <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                <div class="flex items-center space-x-2">
-                    <div class="w-3 h-3 bg-indigo-600 rounded-full"></div>
-                    <h2 class="font-bold text-slate-800 text-base">기간 설정 및 D-Day 타임라인</h2>
+        <section class="lg:col-span-7 flex flex-col glass-card rounded-3xl overflow-hidden shadow-2xl border border-slate-800">
+            <div class="p-5 border-b border-slate-800/80 flex items-center justify-between bg-slate-900/60">
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-3 h-3 bg-indigo-500 rounded-full"></div>
+                    <h2 class="font-bold text-slate-100 text-sm tracking-wide">기간 설정 및 D-Day 타임라인</h2>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <button onclick="openCustomAddModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3 py-1.5 rounded-xl transition shadow-sm">
+                    <button onclick="openCustomAddModal()" class="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition shadow-md shadow-indigo-500/20 border border-indigo-400/30">
                         + 직접 일정 추가
                     </button>
                 </div>
             </div>
 
-            <div class="px-5 py-3 border-b border-slate-100 flex items-center justify-between bg-indigo-50/30">
+            <!-- Month Navigation Bar -->
+            <div class="px-5 py-3 border-b border-slate-800/60 flex items-center justify-between bg-slate-900/40">
                 <div class="flex items-center space-x-3">
-                    <div class="flex items-center space-x-1 bg-white border border-slate-200 rounded-xl p-1 shadow-xs">
-                        <button onclick="changeMonth(-1)" class="p-1.5 hover:bg-slate-100 rounded-lg text-slate-600 transition" title="이전 달">
+                    <div class="flex items-center space-x-1.5 bg-slate-800/80 border border-slate-700/60 rounded-2xl p-1 shadow-inner">
+                        <button onclick="changeMonth(-1)" class="p-2 hover:bg-slate-700 rounded-xl text-indigo-300 transition" title="이전 달">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
                             </svg>
                         </button>
-                        <span id="current-month-display" class="px-3 font-extrabold text-indigo-900 text-sm">2026년 9월</span>
-                        <button onclick="changeMonth(1)" class="p-1.5 hover:bg-slate-100 rounded-lg text-slate-600 transition" title="다음 달">
+                        <span id="current-month-display" class="px-4 font-black text-indigo-200 text-sm tracking-wide">2026년 9월</span>
+                        <button onclick="changeMonth(1)" class="p-2 hover:bg-slate-700 rounded-xl text-indigo-300 transition" title="다음 달">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
                             </svg>
                         </button>
                     </div>
-                    <button onclick="resetToCurrentMonth()" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 bg-white border border-indigo-200 px-2.5 py-2 rounded-xl shadow-xs transition">오늘 월</button>
+                    <button onclick="resetToCurrentMonth()" class="text-xs font-bold text-slate-300 hover:text-white bg-slate-800/80 border border-slate-700/60 px-3 py-2.5 rounded-xl transition shadow-sm">이번 달</button>
                 </div>
                 <div class="flex space-x-1.5 text-xs">
-                    <button onclick="filterTimeline('all')" id="timeline-filter-all" class="px-2.5 py-1.5 rounded-lg bg-indigo-600 text-white font-medium transition">전체</button>
-                    <button onclick="filterTimeline('active')" id="timeline-filter-active" class="px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition">진행중</button>
-                    <button onclick="filterTimeline('completed')" id="timeline-filter-completed" class="px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition">완료</button>
+                    <button onclick="filterTimeline('all')" id="timeline-filter-all" class="px-3 py-1.5 rounded-xl bg-indigo-600 text-white font-bold transition shadow-sm">전체</button>
+                    <button onclick="filterTimeline('active')" id="timeline-filter-active" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 hover:bg-slate-700 font-medium transition border border-slate-700/50">진행중</button>
+                    <button onclick="filterTimeline('completed')" id="timeline-filter-completed" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 hover:bg-slate-700 font-medium transition border border-slate-700/50">완료</button>
                 </div>
             </div>
 
-            <div class="px-5 py-2 border-b border-slate-100 flex items-center justify-between text-xs bg-white text-slate-500 font-medium">
+            <div class="px-5 py-2 border-b border-slate-800/50 flex items-center justify-between text-xs bg-slate-900/20 text-slate-400 font-medium">
                 <span id="timeline-stats">선택 월 일정 0개</span>
-                <span class="text-[11px] text-indigo-600 font-bold">💡 날짜와 마감기한(D-Day)을 크게 강조했습니다</span>
+                <span class="text-[11px] text-indigo-300 font-bold">🎯 시작일 기준 D-Day 및 날짜 강조 모드</span>
             </div>
 
-            <div id="timeline-list" class="flex-1 overflow-y-auto p-4 space-y-4 max-h-[calc(100vh-330px)]">
+            <!-- Timeline List Container -->
+            <div id="timeline-list" class="flex-1 overflow-y-auto p-4 space-y-4 max-h-[calc(100vh-340px)]">
                 <!-- Dynamically populated timeline items -->
             </div>
         </section>
@@ -135,35 +152,35 @@
     </main>
 
     <!-- Modal: Setup Timeline Period for Inbox Item -->
-    <div id="setup-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-xl max-w-md w-full overflow-hidden transform transition-all">
-            <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-                <h3 class="font-bold text-slate-800 text-lg">이벤트 기간 설정 및 등록</h3>
-                <button onclick="closeSetupModal()" class="text-slate-400 hover:text-slate-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div id="setup-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl max-w-md w-full overflow-hidden transform transition-all glow-effect">
+            <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/80">
+                <h3 class="font-black text-slate-100 text-base">이벤트 기간 설정 및 등록</h3>
+                <button onclick="closeSetupModal()" class="text-slate-400 hover:text-white p-1 rounded-xl bg-slate-800/60">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
-            <form id="setup-form" onsubmit="submitSetupForm(event)" class="p-6 space-y-4">
+            <form id="setup-form" onsubmit="submitSetupForm(event)" class="p-6 space-y-4 text-xs">
                 <input type="hidden" id="modal-inbox-id">
                 <div>
-                    <label class="block text-xs font-bold text-slate-600 mb-1">이벤트명</label>
-                    <input type="text" id="modal-title" required class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <label class="block font-bold text-slate-300 mb-1.5">이벤트명</label>
+                    <input type="text" id="modal-title" required class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-2xl text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium">
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-slate-600 mb-1">시작일</label>
-                        <input type="date" id="modal-start-date" required class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold text-indigo-900">
+                        <label class="block font-bold text-indigo-300 mb-1.5">시작일 (D-Day 기준)</label>
+                        <input type="date" id="modal-start-date" required class="w-full px-3.5 py-2.5 bg-slate-800 border border-indigo-500/50 rounded-2xl text-indigo-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-600 mb-1">마감일 (D-Day 기준)</label>
-                        <input type="date" id="modal-end-date" required class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold text-rose-900">
+                        <label class="block font-bold text-rose-300 mb-1.5">마감일</label>
+                        <input type="date" id="modal-end-date" required class="w-full px-3.5 py-2.5 bg-slate-800 border border-rose-500/50 rounded-2xl text-rose-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-600 mb-1">카테고리</label>
-                    <select id="modal-category" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <label class="block font-bold text-slate-300 mb-1.5">카테고리</label>
+                    <select id="modal-category" class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-2xl text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium">
                         <option value="축제">축제/행사</option>
                         <option value="시험">시험/평가</option>
                         <option value="동아리">동아리</option>
@@ -171,50 +188,55 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-600 mb-1">상세 내용 및 준비 사항</label>
-                    <textarea id="modal-desc" rows="3" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="준비물, 장소, 주의사항 등을 적어보세요..."></textarea>
+                    <label class="block font-bold text-slate-300 mb-1.5">상세 내용 및 준비 사항</label>
+                    <textarea id="modal-desc" rows="3" class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-2xl text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="준비물, 장소, 주의사항 등을 적어보세요..."></textarea>
                 </div>
                 <div class="pt-2 flex space-x-3">
-                    <button type="button" onclick="closeSetupModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-xl text-sm transition">취소</button>
-                    <button type="submit" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-xl text-sm transition shadow-md shadow-indigo-200">타임라인에 추가</button>
+                    <button type="button" onclick="closeSetupModal()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-3 rounded-2xl transition">취소</button>
+                    <button type="submit" class="flex-1 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold py-3 rounded-2xl transition shadow-lg shadow-indigo-500/30">타임라인에 추가</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- Modal: Simulate Incoming Notification -->
-    <div id="simulation-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-xl max-w-sm w-full overflow-hidden transform transition-all">
-            <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-                <h3 class="font-bold text-slate-800 text-base">알림 수신 시뮬레이션</h3>
-                <button onclick="closeSimulationModal()" class="text-slate-400 hover:text-slate-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div id="simulation-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden transform transition-all glow-effect">
+            <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/80">
+                <h3 class="font-black text-slate-100 text-base">새 알림 수신 시뮬레이션</h3>
+                <button onclick="closeSimulationModal()" class="text-slate-400 hover:text-white p-1 rounded-xl bg-slate-800/60">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
-            <div class="p-6 space-y-3">
-                <p class="text-xs text-slate-500">학교 공지사항이나 알림톡으로 들어오는 가상의 이벤트를 선택해 즉시 수신함에 추가해보세요.</p>
-                <div class="space-y-2">
-                    <button onclick="simulateReceive('2학기 기말고사 안내', '시험', '전학년 대상 체육관 및 각 교실 시행', '2026-10-15', '2026-10-22')" class="w-full text-left p-3 rounded-xl border border-slate-200 hover:bg-indigo-50/50 hover:border-indigo-300 transition text-xs">
-                        <span class="font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded mr-2">시험</span> 2학기 기말고사 안내
+            <div class="p-6 space-y-3 text-xs">
+                <p class="text-slate-400 leading-relaxed">학교 공지사항이나 알림톡으로 들어오는 가상의 이벤트를 선택해 즉시 수신함에 추가해보세요.</p>
+                <div class="space-y-2.5 pt-2">
+                    <button onclick="simulateReceive('2학기 기말고사 안내', '시험', '전학년 대상 체육관 및 각 교실 시행', '2026-10-15', '2026-10-22')" class="w-full text-left p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/60 hover:border-indigo-500 hover:bg-slate-800 transition flex items-center space-x-3 group">
+                        <span class="font-extrabold text-amber-300 bg-amber-500/20 px-2.5 py-1 rounded-xl">시험</span>
+                        <div class="flex-1"><div class="font-bold text-slate-200 group-hover:text-white">2학기 기말고사 일정 공지</div></div>
                     </button>
-                    <button onclick="simulateReceive('교내 동아리 발표대회 및 전시', '동아리', '본관 중앙 로비 및 시청각실', '2026-10-01', '2026-10-10')" class="w-full text-left p-3 rounded-xl border border-slate-200 hover:bg-indigo-50/50 hover:border-indigo-300 transition text-xs">
-                        <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded mr-2">동아리</span> 교내 동아리 발표대회
+                    <button onclick="simulateReceive('교내 동아리 발표대회 및 전시', '동아리', '본관 중앙 로비 및 시청각실', '2026-10-01', '2026-10-10')" class="w-full text-left p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/60 hover:border-indigo-500 hover:bg-slate-800 transition flex items-center space-x-3 group">
+                        <span class="font-extrabold text-emerald-300 bg-emerald-500/20 px-2.5 py-1 rounded-xl">동아리</span>
+                        <div class="flex-1"><div class="font-bold text-slate-200 group-hover:text-white">교내 동아리 발표대회 참가</div></div>
                     </button>
-                    <button onclick="simulateReceive('대동제 축제 장기자랑 예선', '축제', '학생회실 및 음악실 접수', '2026-09-25', '2026-09-30')" class="w-full text-left p-3 rounded-xl border border-slate-200 hover:bg-indigo-50/50 hover:border-indigo-300 transition text-xs">
-                        <span class="font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded mr-2">축제</span> 대동제 축제 장기자랑 예선
+                    <button onclick="simulateReceive('대동제 축제 장기자랑 예선', '축제', '학생회실 및 음악실 접수', '2026-09-25', '2026-09-30')" class="w-full text-left p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/60 hover:border-indigo-500 hover:bg-slate-800 transition flex items-center space-x-3 group">
+                        <span class="font-extrabold text-rose-300 bg-rose-500/20 px-2.5 py-1 rounded-xl">축제</span>
+                        <div class="flex-1"><div class="font-bold text-slate-200 group-hover:text-white">대동제 장기자랑 참가 신청</div></div>
                     </button>
-                    <button onclick="simulateReceive('학생증 재발급 및 모바일 학생증 등록', '행정', '행정실 및 학생복지부', '2026-09-20', '2026-09-28')" class="w-full text-left p-3 rounded-xl border border-slate-200 hover:bg-indigo-50/50 hover:border-indigo-300 transition text-xs">
-                        <span class="font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded mr-2">행정</span> 학생증 재발급 및 모바일 등록
+                    <button onclick="simulateReceive('학생증 재발급 및 모바일 등록', '행정', '행정실 및 학생복지부', '2026-09-20', '2026-09-28')" class="w-full text-left p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/60 hover:border-indigo-500 hover:bg-slate-800 transition flex items-center space-x-3 group">
+                        <span class="font-extrabold text-sky-300 bg-sky-500/20 px-2.5 py-1 rounded-xl">행정</span>
+                        <div class="flex-1"><div class="font-bold text-slate-200 group-hover:text-white">학생증 모바일 등록 기간</div></div>
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- SCRIPT LOGIC -->
     <script>
-        // Initial Mock Data for Inbox and Timeline
+        // Initial Mock Data
         let inboxItems = [
             { id: 1, title: '2학기 중간고사 일정 안내', category: '시험', desc: '전 학년 대상 과목별 시험 범위 및 시간표 공지', dateDetected: '2026-09-15', defaultStart: '2026-10-05', defaultEnd: '2026-10-09', isProcessed: false },
             { id: 2, title: '한빛 예술제(학교 축제) 부스 신청', category: '축제', desc: '학급별 및 동아리별 체험 부스 기획서 제출', dateDetected: '2026-09-17', defaultStart: '2026-09-22', defaultEnd: '2026-09-30', isProcessed: false },
@@ -230,15 +252,14 @@
 
         // Calendar Month Navigation State (Default to September 2026)
         let viewingYear = 2026;
-        let viewingMonth = 8; // 0-indexed (8 = September)
+        let viewingMonth = 8; // September
 
-        // Initialize App on Load
         window.onload = function() {
             renderInbox();
             renderTimeline();
         };
 
-        // --- Month Navigation Functions ---
+        // --- Month Navigation ---
         function changeMonth(direction) {
             viewingMonth += direction;
             if (viewingMonth > 11) {
@@ -265,9 +286,9 @@
                 const btn = document.getElementById(`inbox-filter-${cat}`);
                 if (btn) {
                     if (cat === category) {
-                        btn.className = 'px-3 py-1.5 rounded-lg bg-slate-900 text-white font-medium transition whitespace-nowrap';
+                        btn.className = 'px-3.5 py-1.5 rounded-xl bg-indigo-600 text-white font-bold transition whitespace-nowrap shadow-sm';
                     } else {
-                        btn.className = 'px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition whitespace-nowrap';
+                        btn.className = 'px-3.5 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium transition whitespace-nowrap border border-slate-700/50';
                     }
                 }
             });
@@ -279,7 +300,7 @@
             const countBadge = document.getElementById('inbox-count');
             
             const filtered = inboxItems.filter(item => {
-                if (item.isProcessed) return false; // Hide processed items from inbox
+                if (item.isProcessed) return false;
                 if (currentInboxFilter === 'all') return true;
                 return item.category === currentInboxFilter;
             });
@@ -288,12 +309,12 @@
 
             if (filtered.length === 0) {
                 listContainer.innerHTML = `
-                    <div class="text-center py-12">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-slate-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div class="text-center py-14">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-slate-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                         </svg>
-                        <p class="text-sm font-medium text-slate-500">수신된 신규 알림이 없습니다.</p>
-                        <p class="text-xs text-slate-400 mt-1">상단의 '새 알림 시뮬레이션'을 눌러 확인해보세요!</p>
+                        <p class="text-xs font-semibold text-slate-400">수신된 신규 알림이 없습니다.</p>
+                        <p class="text-[11px] text-slate-500 mt-1">상단의 '새 알림 시뮬레이션'을 눌러 확인해보세요!</p>
                     </div>
                 `;
                 return;
@@ -303,23 +324,21 @@
             filtered.forEach(item => {
                 const badgeColor = getCategoryColor(item.category);
                 const el = document.createElement('div');
-                el.className = 'bg-slate-50 hover:bg-indigo-50/40 border border-slate-200 rounded-xl p-4 transition shadow-xs flex flex-col justify-between space-y-2';
+                el.className = 'bg-slate-900/80 hover:bg-slate-800/90 border border-slate-800 rounded-2xl p-4 transition shadow-md flex flex-col justify-between space-y-2.5 group';
                 el.innerHTML = `
-                    <div class="flex items-start justify-between">
-                        <span class="text-xs font-bold px-2.5 py-0.5 rounded-full ${badgeColor}">${item.category}</span>
-                        <!-- 날짜가 가장 중요하므로 수신일 표시도 굵고 또렷하게 표시 -->
-                        <span class="text-xs font-bold text-slate-600 bg-white px-2 py-0.5 rounded border border-slate-200">수신: ${item.dateDetected}</span>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-extrabold px-3 py-1 rounded-full ${badgeColor}">${item.category}</span>
+                        <span class="text-xs font-black text-slate-300 bg-slate-800 px-2.5 py-1 rounded-xl border border-slate-700/60">수신: ${item.dateDetected}</span>
                     </div>
                     <div>
-                        <h4 class="font-bold text-slate-800 text-sm">${item.title}</h4>
-                        <p class="text-xs text-slate-600 mt-1 line-clamp-2">${item.desc}</p>
+                        <h4 class="font-bold text-slate-100 text-sm group-hover:text-indigo-300 transition">${item.title}</h4>
+                        <p class="text-xs text-slate-400 mt-1 line-clamp-2">${item.desc}</p>
                     </div>
-                    <!-- 숨기기 버튼 제거 완료 -->
-                    <div class="pt-2 flex justify-end border-t border-slate-200/60">
-                        <button onclick="openSetupModalWithItem(${item.id})" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2 px-3 rounded-lg transition shadow-sm flex items-center justify-center space-x-1.5">
+                    <div class="pt-2 flex justify-end border-t border-slate-800">
+                        <button onclick="openSetupModalWithItem(${item.id})" class="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-xs font-bold py-2.5 px-3 rounded-xl transition shadow-md flex items-center justify-center space-x-1.5">
                             <span>기간 설정 및 등록</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
                             </svg>
                         </button>
                     </div>
@@ -328,7 +347,7 @@
             });
         }
 
-        // --- Simulation Modal Functions ---
+        // --- Simulation Modal ---
         function openSimulationModal() {
             document.getElementById('simulation-modal').classList.remove('hidden');
         }
@@ -351,7 +370,7 @@
             renderInbox();
         }
 
-        // --- Setup Modal & Timeline Registration ---
+        // --- Setup Modal ---
         function openSetupModalWithItem(id) {
             const item = inboxItems.find(i => i.id === id);
             if (!item) return;
@@ -416,16 +435,16 @@
             renderTimeline();
         }
 
-        // --- Timeline & Deadline Functions ---
+        // --- Timeline & D-Day ---
         function filterTimeline(filter) {
             currentTimelineFilter = filter;
             ['all', 'active', 'completed'].forEach(f => {
                 const btn = document.getElementById(`timeline-filter-${f}`);
                 if (btn) {
                     if (f === filter) {
-                        btn.className = 'px-2.5 py-1.5 rounded-lg bg-indigo-600 text-white font-medium transition';
+                        btn.className = 'px-3 py-1.5 rounded-xl bg-indigo-600 text-white font-bold transition shadow-sm';
                     } else {
-                        btn.className = 'px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition';
+                        btn.className = 'px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 hover:bg-slate-700 font-medium transition border border-slate-700/50';
                     }
                 }
             });
@@ -442,41 +461,36 @@
             renderTimeline();
         }
 
-        function calculateDday(endDateStr) {
+        function calculateDday(startDateStr) {
             const today = new Date();
             today.setHours(0, 0, 0, 0);
-            const target = new Date(endDateStr);
+            const target = new Date(startDateStr);
             target.setHours(0, 0, 0, 0);
             
             const diffTime = target - today;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             
-            if (diffDays === 0) return 'D-DAY';
-            if (diffDays > 0) return `D-${diffDays}`;
-            return `D+${Math.abs(diffDays)}`;
+            if (diffDays === 0) return '시작 D-DAY';
+            if (diffDays > 0) return `시작 D-${diffDays}`;
+            return `시작 D+${Math.abs(diffDays)}`;
         }
 
         function renderTimeline() {
-            // Update Header Month Display
             document.getElementById('current-month-display').textContent = `${viewingYear}년 ${viewingMonth + 1}월`;
 
             const listContainer = document.getElementById('timeline-list');
             const stats = document.getElementById('timeline-stats');
 
-            // Filter items that overlap with the currently viewed month/year or match filter tabs
             const filtered = timelineItems.filter(item => {
-                // Check status filter
                 if (currentTimelineFilter === 'active' && item.completed) return false;
                 if (currentTimelineFilter === 'completed' && !item.completed) return false;
 
-                // Check if the event's start or end month matches the viewing month/year
                 const start = new Date(item.startDate);
                 const end = new Date(item.endDate);
                 
                 const startMatch = start.getFullYear() === viewingYear && start.getMonth() === viewingMonth;
                 const endMatch = end.getFullYear() === viewingYear && end.getMonth() === viewingMonth;
                 
-                // Also include if the current viewing month is between start and end
                 const viewingDateObj = new Date(viewingYear, viewingMonth, 1);
                 const viewingEndObj = new Date(viewingYear, viewingMonth + 1, 0);
                 const spansMonth = start <= viewingEndObj && end >= viewingDateObj;
@@ -488,66 +502,66 @@
 
             if (filtered.length === 0) {
                 listContainer.innerHTML = `
-                    <div class="text-center py-16">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-slate-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div class="text-center py-20">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 mx-auto text-slate-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
-                        <p class="text-sm font-medium text-slate-500">${viewingYear}년 ${viewingMonth + 1}월에 등록된 일정이 없습니다.</p>
-                        <p class="text-xs text-slate-400 mt-1">상단의 화살표를 눌러 다른 달을 확인하거나 좌측에서 일정을 등록해보세요.</p>
+                        <p class="text-xs font-semibold text-slate-400">${viewingYear}년 ${viewingMonth + 1}월에 등록된 일정이 없습니다.</p>
+                        <p class="text-[11px] text-slate-500 mt-1">상단의 화살표를 눌러 다른 달을 확인하거나 좌측에서 일정을 등록해보세요.</p>
                     </div>
                 `;
                 return;
             }
 
-            // Sort by end date (closest deadline first)
-            filtered.sort((a, b) => new Date(a.endDate) - new Date(b.endDate));
+            filtered.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
 
             listContainer.innerHTML = '';
             filtered.forEach(item => {
                 const badgeColor = getCategoryColor(item.category);
-                const ddayText = calculateDday(item.endDate);
-                const isUrgent = ddayText.startsWith('D-') && parseInt(ddayText.replace('D-', '')) <= 3;
+                const ddayText = calculateDday(item.startDate);
+                const isUrgent = ddayText.includes('D-') && parseInt(ddayText.replace(/[^0-9]/g, '')) <= 3;
                 
-                let ddayBadgeClass = 'bg-slate-100 text-slate-700 text-base px-3 py-1';
+                let ddayBadgeClass = 'bg-slate-800 text-slate-300 text-sm px-3.5 py-1.5 border border-slate-700';
                 if (item.completed) {
-                    ddayBadgeClass = 'bg-emerald-100 text-emerald-800 text-sm px-2.5 py-1';
-                } else if (ddayText === 'D-DAY' || isUrgent) {
-                    ddayBadgeClass = 'bg-rose-600 text-white text-lg px-3.5 py-1.5 animate-pulse font-extrabold shadow-md';
+                    ddayBadgeClass = 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs px-3 py-1';
+                } else if (ddayText.includes('D-DAY') || isUrgent) {
+                    ddayBadgeClass = 'bg-gradient-to-r from-rose-600 to-pink-600 text-white text-base px-4 py-1.5 animate-pulse font-black shadow-lg shadow-rose-500/30';
                 } else {
-                    ddayBadgeClass = 'bg-indigo-100 text-indigo-900 text-base px-3 py-1 font-bold';
+                    ddayBadgeClass = 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 text-sm px-3.5 py-1.5 font-black';
                 }
 
                 const el = document.createElement('div');
-                el.className = `border rounded-2xl p-4 transition ${item.completed ? 'bg-slate-50 border-slate-200 opacity-75' : 'bg-white border-slate-200 shadow-xs hover:shadow-md'}`;
+                el.className = `border rounded-3xl p-5 transition ${item.completed ? 'bg-slate-900/40 border-slate-800/80 opacity-70' : 'bg-slate-900/90 border-slate-800 shadow-xl hover:border-indigo-500/50'}`;
                 
                 el.innerHTML = `
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2.5">
-                            <span class="text-xs font-bold px-2.5 py-1 rounded-full ${badgeColor}">${item.category}</span>
-                            <!-- 날짜가 가장 중요하므로 D-Day 뱃지를 훨씬 크고 눈에 띄게 강조 -->
-                            <span class="rounded-xl font-extrabold tracking-wide ${ddayBadgeClass}">${item.completed ? '완료됨' : ddayText}</span>
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xs font-extrabold px-3 py-1 rounded-full ${badgeColor}">${item.category}</span>
+                            <span class="rounded-2xl tracking-wide ${ddayBadgeClass}">${item.completed ? '완료됨' : ddayText}</span>
                         </div>
-                        <div class="flex items-center space-x-1.5">
-                            <button onclick="toggleCompleteTimeline(${item.id})" class="text-xs px-3 py-1.5 rounded-xl border font-bold transition ${item.completed ? 'bg-slate-200 text-slate-700 border-slate-300' : 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'}">
+                        <div class="flex items-center space-x-2">
+                            <button onclick="toggleCompleteTimeline(${item.id})" class="text-xs px-3.5 py-2 rounded-xl border font-bold transition ${item.completed ? 'bg-slate-800 text-slate-300 border-slate-700' : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 hover:bg-emerald-500/30'}">
                                 ${item.completed ? '다시 진행' : '완료하기'}
                             </button>
-                            <button onclick="deleteTimeline(${item.id})" class="p-2 text-slate-400 hover:text-rose-600 rounded-xl transition" title="삭제">
+                            <button onclick="deleteTimeline(${item.id})" class="p-2 text-slate-400 hover:text-rose-400 rounded-xl hover:bg-slate-800 transition" title="삭제">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                 </svg>
                             </button>
                         </div>
                     </div>
-                    <div class="mt-3.5">
-                        <h4 class="font-bold text-slate-900 text-base ${item.completed ? 'line-through text-slate-400' : ''}">${item.title}</h4>
-                        <p class="text-xs text-slate-600 mt-1">${item.desc}</p>
+                    <div class="mt-4">
+                        <h4 class="font-bold text-slate-100 text-base ${item.completed ? 'line-through text-slate-500' : ''}">${item.title}</h4>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">${item.desc}</p>
                     </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                        <div class="flex items-center space-x-1.5 font-bold text-slate-800 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200/80">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            <span>기간: ${item.startDate} ~ ${item.endDate}</span>
+                    <div class="mt-4 pt-3.5 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                        <div class="flex items-center space-x-2 font-extrabold text-indigo-300 bg-indigo-950/50 px-3.5 py-2.5 rounded-2xl border border-indigo-500/30">
+                            <span>🚀 시작일:</span>
+                            <span class="text-sm font-black text-white">${item.startDate}</span>
+                        </div>
+                        <div class="flex items-center space-x-2 font-extrabold text-rose-300 bg-rose-950/50 px-3.5 py-2.5 rounded-2xl border border-rose-500/30">
+                            <span>🏁 마감일:</span>
+                            <span class="text-sm font-black text-white">${item.endDate}</span>
                         </div>
                     </div>
                 `;
@@ -557,11 +571,11 @@
 
         function getCategoryColor(cat) {
             switch(cat) {
-                case '축제': return 'bg-rose-100 text-rose-800';
-                case '시험': return 'bg-amber-100 text-amber-800';
-                case '동아리': return 'bg-emerald-100 text-emerald-800';
-                case '행정': return 'bg-sky-100 text-sky-800';
-                default: return 'bg-slate-100 text-slate-800';
+                case '축제': return 'bg-rose-500/20 text-rose-300 border border-rose-500/30';
+                case '시험': return 'bg-amber-500/20 text-amber-300 border border-amber-500/30';
+                case '동아리': return 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+                case '행정': return 'bg-sky-500/20 text-sky-300 border border-sky-500/30';
+                default: return 'bg-slate-800 text-slate-300 border border-slate-700';
             }
         }
     </script>
