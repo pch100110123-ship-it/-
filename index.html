@@ -8,64 +8,53 @@
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#e8f5fd; --surface:#ffffff; --ink:#10344d; --muted:#4f6b80; --line:#b9dcf1;
-  --pri:#1b84c9; --pri-ink:#ffffff; --pri-soft:#d9f0fc;
-  --new:#e8304f; --new-soft:#ffe8ec; --hl:#ffe780; --no:#5d7a8f; --blk:#1b84c9; --blk-ink:#ffffff;
+  --bg:#eaf5ff; --surface:#ffffff; --ink:#27304a; --muted:#66708c; --line:#cfdcf0; --hl:#ffe780;
+  --new:#ff5c7a; --new-soft:#ffe6ec; --ok:#2fae7b; --no:#ee5b6e; --dim:0%; --edge:#27304a;
   --head:"Jua","Noto Sans KR",sans-serif; --body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
   color-scheme:light; box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){--bg:#0f2230;--surface:#153247;--ink:#e6f4fc;--muted:#9cc0d6;--line:#2b5673;--pri:#6cc3f2;--pri-ink:#0f2230;--pri-soft:#1d4560;--new:#ff7d93;--new-soft:#4a2433;--hl:#7a6516;--no:#9cc0d6;--blk:#6cc3f2;--blk-ink:#0f2230;color-scheme:dark}
+  :root:not([data-theme="light"]){--bg:#151a2b;--surface:#1f2640;--ink:#eef0fb;--muted:#a9b1cf;--line:#343d63;--hl:#7a6516;--new:#ff8fae;--new-soft:#4a2433;--dim:72%;--edge:#eef0fb;color-scheme:dark}
 }
-:root[data-theme="dark"]{--bg:#0f2230;--surface:#153247;--ink:#e6f4fc;--muted:#9cc0d6;--line:#2b5673;--pri:#6cc3f2;--pri-ink:#0f2230;--pri-soft:#1d4560;--new:#ff7d93;--new-soft:#4a2433;--hl:#7a6516;--no:#9cc0d6;--blk:#6cc3f2;--blk-ink:#0f2230;color-scheme:dark}
+:root[data-theme="dark"]{--bg:#151a2b;--surface:#1f2640;--ink:#eef0fb;--muted:#a9b1cf;--line:#343d63;--hl:#7a6516;--new:#ff8fae;--new-soft:#4a2433;--dim:72%;--edge:#eef0fb;color-scheme:dark}
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.6 var(--body);word-break:keep-all}
 .wrap{max-width:1240px;margin:0 auto;padding:0 16px}
-header{text-align:center;padding:26px 0 8px}
+header{text-align:center;padding:28px 0 6px}
 header h1{font:400 clamp(30px,6vw,46px)/1.2 var(--head);margin:0}
-
-h3.sec{font:400 22px/1.3 var(--head);margin:26px 0 10px;display:flex;align-items:center;gap:8px}
+header h1 span{display:inline-block;transform:rotate(-8deg)}
+h3.sec{font:400 22px/1.3 var(--head);margin:24px 0 10px;display:flex;align-items:baseline;gap:8px}
 h3.sec small{font:400 14px var(--body);color:var(--muted)}
 .grid{display:grid;gap:14px}
-.key{grid-template-columns:1fr}
-.more{grid-template-columns:1fr}
-.card{background:var(--surface);border:2px solid var(--blk);border-radius:22px;overflow:hidden}
-.card h2{margin:0;padding:10px 16px;font:400 20px/1.3 var(--head);background:var(--blk);color:var(--blk-ink);display:flex;align-items:center;gap:8px}
-.card h2 i{font-style:normal;font-size:24px}
-.card ul{margin:0;padding:10px 16px 14px;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.key{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.more{grid-template-columns:repeat(auto-fill,minmax(270px,1fr))}
+.card{position:relative;background:var(--surface);border:2px solid var(--line);border-radius:22px;overflow:hidden}
+.card h2{margin:0;padding:11px 16px;font:400 20px/1.3 var(--head);background:color-mix(in srgb,var(--c) calc(100% - var(--dim)),#1f2640);display:flex;align-items:center;gap:8px}
+.card h2 i{font-style:normal;font-size:26px}
+.card ul{margin:0;padding:10px 16px 14px;list-style:none;display:flex;flex-direction:column;gap:7px}
 .card .sm{display:block;color:var(--muted);font-size:13.5px}
 .card p{margin:0;padding:6px 16px 14px;color:var(--muted);font-size:14px}
-.card.big{border:3px solid var(--blk);font-size:16px}
-.card.big h2{background:var(--blk);color:var(--blk-ink);font-size:24px;padding:12px 18px}
-.card.big h2 em{margin-left:auto;font:400 13px var(--head);font-style:normal;background:var(--blk-ink);color:var(--blk);border-radius:999px;padding:3px 10px 2px}
-.card.big ul{padding:14px 18px 18px;gap:10px}
-
-.ok,.no,.new{display:inline-block;font:400 12.5px/1 var(--head);border-radius:999px;padding:3px 8px 2px;margin-right:6px;vertical-align:1px}
-.ok{background:var(--pri);color:var(--pri-ink)}
-.no{background:var(--no);color:var(--surface)}
-.new{background:var(--new);color:#fff}
-li.isnew{background:var(--new-soft);border-left:5px solid var(--new);border-radius:8px;padding:10px 12px}
+.card.big{border:3px solid var(--edge);font-size:16px;box-shadow:5px 5px 0 var(--c)}
+.card.big h2{font-size:24px;padding:13px 18px}
+.card.big h2 em{margin-left:auto;font:400 13px var(--head);font-style:normal;background:var(--edge);color:var(--surface);border-radius:999px;padding:3px 10px 2px;transform:rotate(4deg)}
+.card.big ul{padding:14px 18px 18px;gap:9px}
+.ok,.no,.new{display:inline-block;font:400 12.5px/1 var(--head);border-radius:999px;padding:3px 8px 2px;margin-right:6px;vertical-align:1px;color:#fff}
+.ok{background:var(--ok)}.no{background:var(--no)}.new{background:var(--new)}
+li.isnew{background:var(--new-soft);border-left:5px solid var(--new);border-radius:10px;padding:8px 10px}
 mark{background:linear-gradient(transparent 58%,var(--hl) 58%);color:inherit}
-
 .steps{display:flex;flex-wrap:wrap;align-items:center;gap:6px 2px;padding:12px 16px 4px;margin:0;list-style:none}
 .steps li{display:flex;align-items:center;font-weight:700;font-size:14px}
-.steps li+li::before{content:"▶";font-size:10px;color:var(--pri);margin:0 6px 0 2px}
+.steps li+li::before{content:"▶";font-size:10px;color:var(--new);margin:0 6px 0 2px}
 .steps span{background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:3px 10px}
 .wide{grid-column:1/-1}
-.two{}
-.two li{break-inside:avoid}
-.card.big.hasnew{border-color:var(--blk)}
-.card.big.hasnew h2{background:var(--blk)}
-.phone{grid-column:1/-1}
-.card.big.phone ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
-.card ul li:not(.isnew){background:var(--bg);border-radius:12px;padding:10px 12px}
-@media (max-width:700px){.key{grid-template-columns:1fr}}
+.two{columns:2 260px;column-gap:24px;display:block!important}
+.two li{break-inside:avoid;margin-bottom:7px}
 </style>
 </head>
 <body>
 <header><div class="wrap">
-  <h1>🏫 학급 규정 한눈에 보기</h1>
+  <h1><span>🏫</span> 학급 규정 한눈에 보기</h1>
 </div></header>
 
 <main class="wrap">
@@ -73,7 +62,7 @@ mark{background:linear-gradient(transparent 58%,var(--hl) 58%);color:inherit}
 <h3 class="sec">⭐ 가장 중요해요 <small>매일 지켜야 하는 3가지</small></h3>
 <div class="grid key">
 
-<section class="card big">
+<section class="card big" style="--c:#c9f0dc">
   <h2><i>⏰</i>출결<em>필수</em></h2>
   <ul>
     <li><b>지각</b> <mark>8시 30분까지 교실에 앉지 못하면 지각</mark>이에요</li>
@@ -83,7 +72,7 @@ mark{background:linear-gradient(transparent 58%,var(--hl) 58%);color:inherit}
   </ul>
 </section>
 
-<section class="card big">
+<section class="card big" style="--c:#ffd3de">
   <h2><i>👕</i>복장 · 신발<em>필수</em></h2>
   <ul>
     <li><span class="ok">OK</span>교복, 생활복, 체육복 상·하의 중 하나 이상 입기</li>
@@ -94,7 +83,7 @@ mark{background:linear-gradient(transparent 58%,var(--hl) 58%);color:inherit}
   </ul>
 </section>
 
-<section class="card big hasnew phone" id="phone">
+<section class="card big" style="--c:#ffe9a8">
   <h2><i>📱</i>스마트기기<em>필수</em></h2>
   <ul>
     <li class="isnew"><span class="new">NEW</span><mark>수업 중 지도교사의 허락 없이 전자기기 사용 금지</mark>
@@ -111,7 +100,7 @@ mark{background:linear-gradient(transparent 58%,var(--hl) 58%);color:inherit}
 <h3 class="sec">📚 이것도 알아두세요</h3>
 <div class="grid more">
 
-<section class="card hasnew" id="disrupt">
+<section class="card" style="--c:#e2d9ff">
   <h2><i>🙋</i>수업 방해</h2>
   <ul>
     <li class="isnew"><span class="new">NEW</span>2026년 법 개정 (제20조 4)</li>
@@ -121,7 +110,7 @@ mark{background:linear-gradient(transparent 58%,var(--hl) 58%);color:inherit}
   </ul>
 </section>
 
-<section class="card">
+<section class="card" style="--c:#d3e5ff">
   <h2><i>🎒</i>소지품 검사</h2>
   <ul>
     <li><span class="no">NO</span>원칙적으로 하지 않아요</li>
@@ -131,7 +120,7 @@ mark{background:linear-gradient(transparent 58%,var(--hl) 58%);color:inherit}
   </ul>
 </section>
 
-<section class="card">
+<section class="card" style="--c:#ffd9bf">
   <h2><i>🤝</i>학교폭력 · 교권 침해</h2>
   <ul>
     <li>처리는 <b>특별법</b>에 따라 해요</li>
@@ -141,7 +130,7 @@ mark{background:linear-gradient(transparent 58%,var(--hl) 58%);color:inherit}
   </ul>
 </section>
 
-<section class="card wide">
+<section class="card wide" style="--c:#ffd0d0">
   <h2><i>📈</i>선도 처분 단계</h2>
   <ol class="steps">
     <li><span>교내봉사</span></li><li><span>사회봉사</span></li><li><span>특별교육 이수</span></li><li><span>출석정지(정학, 최대 3회)</span></li><li><span>퇴학</span></li>
@@ -149,7 +138,7 @@ mark{background:linear-gradient(transparent 58%,var(--hl) 58%);color:inherit}
   <p>선도 처분이 확정되면 학급 임원(반장) 등에서 중도 자격을 잃어요.</p>
 </section>
 
-<section class="card wide">
+<section class="card wide" style="--c:#e3f2b3">
   <h2><i>🚫</i>선도 처분을 받을 수 있는 경우</h2>
   <ul class="two">
     <li><b>출결</b> 미인정 결석 연속 5일 · 누계 10일, 미인정 지각·결과 등 누계 15회부터</li>
@@ -162,7 +151,7 @@ mark{background:linear-gradient(transparent 58%,var(--hl) 58%);color:inherit}
   </ul>
 </section>
 
-<section class="card wide">
+<section class="card wide" style="--c:#ffd3de">
   <h2><i>⚠️</i>교권 침해로 보는 행동</h2>
   <ul class="two">
     <li>지도교사에 대한 모욕, 뒷담화 등으로 인한 명예 훼손</li>
