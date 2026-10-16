@@ -1,135 +1,555 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>진주중앙고등학교 학급 규정 안내</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Noto Sans KR', sans-serif;
-        }
-        body {
-            background-color: #f4f6f9;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        header {
-            background-color: #003366;
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            border-radius: 10px;
-            margin-bottom: 25px;
-        }
-        header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-        }
-        header p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
-        }
-        .card h2 {
-            color: #003366;
-            font-size: 1.3rem;
-            border-bottom: 2px solid #003366;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-        }
-        ul {
-            list-style-type: square;
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        .highlight {
-            background-color: #e6f0fa;
-            padding: 12px;
-            border-left: 4px solid #003366;
-            border-radius: 4px;
-            margin-top: 10px;
-            font-size: 0.9rem;
-        }
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 15px;
-            font-size: 0.85rem;
-            color: #666;
-        }
-        a {
-            color: #003366;
-            text-weight: bold;
-        }
-    </style>
-</head>
-<body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>진주중앙고등학교 | 학교 규정 안내</title>
 
-<div class="container">
-    <header>
-        <h1>진주중앙고등학교 학급 생활 규정</h1>
-        <p>서로 존중하고 함께 성장하는 행복한 학급 공동체</p>
-    </header>
+<style>
+:root {
+  --navy: #142d4e;
+  --blue: #245b91;
+  --sky: #eaf3fb;
+  --ink: #1d2938;
+  --muted: #687789;
+  --line: #dce5ee;
+  --paper: #f5f8fc;
+  --white: #fff;
+  --gold: #e8b65a;
+}
 
-    <div class="card">
-        <h2>1. 기본 등교 및 등교 시간 규정</h2>
-        <ul>
-            <li><strong>등교 시간:</strong> 지정된 등교 시간까지 교실 입실 완료</li>
-            <li><strong>지각 처리:</strong> 사유 없는 지각 시 학급 자치회 규칙에 따른 계도 진행</li>
-            <li><strong>복장 규정:</strong> 단정한 교복(또는 지정 생활복) 착용</li>
-        </ul>
-    </div>
+* {
+  box-sizing: border-box;
+}
 
-    <div class="card">
-        <h2>2. 수업 시간 및 교실 예절</h2>
-        <ul>
-            <li>수업 시작 전 교재 및 학용품 미리 준비하기</li>
-            <li>수업 중 전자기기(스마트폰 등) 사용은 선생님의 허가 하에만 가능</li>
-            <li>수업 진행 시 기본 예의 준수 및 다른 학생의 학습권 존중</li>
-        </ul>
-    </div>
+html {
+  scroll-behavior: smooth;
+}
 
-    <div class="card">
-        <h2>3. 학급 환경 및 청소 주번 규정</h2>
-        <ul>
-            <li><strong>청소 시간:</strong> 종례 후 지정된 구역 청소 및 분리수거 실시</li>
-            <li><strong>개인 자리:</strong> 자신의 책상 및 주변은 항상 깨끗하게 유지</li>
-            <li>공용 물품 사용 후 제자리에 정돈하기</li>
-        </ul>
-    </div>
+body {
+  margin: 0;
+  font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.65;
+}
 
-    <div class="card">
-        <h2>4. 상벌점 및 자치 규칙</h2>
-        <ul>
-            <li>학교 생활교육위원회 규정 및 학교 상벌점 기준 준수</li>
-            <li>학급 내 솔선수범 및 협동 활동 참여 시 학급 포상 부여</li>
-        </ul>
-        <div class="highlight">
-            📌 <strong>참고:</strong> 자세한 학교생활인권규정 및 전체 학교 규정은 
-            <a href="https://jinjuja-h.gne.go.kr" target="_blank">진주중앙고등학교 공식 홈페이지</a>에서 확인하실 수 있습니다.
-        </div>
-    </div>
+a {
+  color: inherit;
+}
 
-    <footer>
-        <p>© 진주중앙고등학교 학급 자치회 | 본 페이지는 학급 안내용으로 제작되었습니다.</p>
-    </footer>
-</div>
+.topbar {
+  background: var(--navy);
+  color: #dce8f6;
+  font-size: 13px;
+  padding: 9px 22px;
+}
 
-</body>
-</html>
+.topbar-inner,
+.nav-inner,
+.container {
+  max-width: 1120px;
+  margin: auto;
+}
+
+.topbar-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+header {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.crest {
+  width: 43px;
+  height: 43px;
+  border-radius: 13px;
+  background: var(--navy);
+  display: grid;
+  place-items: center;
+  color: white;
+  font-weight: 900;
+  font-size: 19px;
+}
+
+.brand strong {
+  display: block;
+  color: var(--navy);
+  font-size: 17px;
+}
+
+.brand small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #3e536b;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.nav-links a:hover {
+  color: var(--blue);
+}
+
+/* 메인 배너 */
+
+.hero {
+  background: linear-gradient(
+    120deg,
+    #142d4e 0%,
+    #245b91 72%,
+    #3979aa 100%
+  );
+  color: #fff;
+  padding: 62px 22px 58px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero:after {
+  content: "";
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border: 1px solid #ffffff20;
+  border-radius: 50%;
+  right: 7%;
+  top: -130px;
+  box-shadow:
+    0 0 0 42px #ffffff09,
+    0 0 0 84px #ffffff07;
+}
+
+.hero-content {
+  max-width: 1120px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: #d5e7fb;
+  font-weight: 800;
+}
+
+.hero h1 {
+  font-size: clamp(30px, 5vw, 46px);
+  line-height: 1.22;
+  margin: 14px 0 15px;
+  letter-spacing: -1.5px;
+}
+
+.hero p {
+  color: #e3edf8;
+  max-width: 620px;
+  margin: 0 0 25px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 11px 16px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 14px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn-light {
+  background: #fff;
+  color: var(--navy);
+}
+
+.btn-outline {
+  border-color: #ffffff80;
+  color: #fff;
+  background: #ffffff0d;
+}
+
+/* 콘텐츠 영역 */
+
+.container {
+  padding: 30px 22px 60px;
+}
+
+.notice {
+  background: #fff8e8;
+  border: 1px solid #f0dba8;
+  color: #6c521f;
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-size: 13px;
+  margin-bottom: 26px;
+}
+
+.section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 32px 0 17px;
+}
+
+.section-head h2 {
+  margin: 0;
+  font-size: 23px;
+  color: var(--navy);
+  letter-spacing: -0.5px;
+}
+
+.section-head p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* 검색창 */
+
+.searchbox {
+  display: flex;
+  gap: 10px;
+  background: white;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 8px 25px #142d4e08;
+}
+
+.searchbox input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  font-size: 15px;
+  padding: 8px 10px;
+  background: transparent;
+}
+
+.searchbox button {
+  background: var(--blue);
+  color: white;
+  border: 0;
+  border-radius: 9px;
+  padding: 10px 17px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* 규정 분류 버튼 */
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 14px 0 20px;
+}
+
+.filter {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 30px;
+  padding: 8px 14px;
+  color: #53657a;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.filter.active,
+.filter:hover {
+  background: var(--navy);
+  color: white;
+  border-color: var(--navy);
+}
+
+/* 규정 카드 */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 20px;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px #142d4e0d;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconbox {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--sky);
+  font-size: 21px;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--blue);
+  background: #edf5fc;
+  border-radius: 30px;
+  padding: 5px 8px;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin: 16px 0 6px;
+  color: var(--navy);
+}
+
+.card p {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 15px;
+  min-height: 42px;
+}
+
+.card ul {
+  padding-left: 18px;
+  margin: 0 0 17px;
+  font-size: 13px;
+  color: #405166;
+}
+
+.card li {
+  margin: 5px 0;
+}
+
+.more {
+  border: 0;
+  background: transparent;
+  color: var(--blue);
+  font-weight: 800;
+  padding: 0;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.detail {
+  display: none;
+  background: #f7faff;
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 13px;
+  color: #405166;
+  font-size: 13px;
+}
+
+.card.expanded .detail {
+  display: block;
+}
+
+.empty {
+  display: none;
+  background: white;
+  border: 1px dashed var(--line);
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* 하단 정보 */
+
+.lower {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.panel {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 22px;
+}
+
+.panel h2 {
+  font-size: 19px;
+  color: var(--navy);
+  margin: 0 0 14px;
+}
+
+.rule-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  text-decoration: none;
+  padding: 13px 0;
+  border-bottom: 1px solid #edf1f5;
+}
+
+.rule-link:last-child {
+  border-bottom: 0;
+}
+
+.rule-link strong {
+  display: block;
+  font-size: 14px;
+}
+
+.rule-link small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.arrow {
+  color: var(--blue);
+  font-size: 20px;
+}
+
+.quicklist {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.quicklist li {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0;
+  font-size: 13px;
+  color: #46576b;
+}
+
+.dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  border-radius: 50%;
+  margin-top: 8px;
+}
+
+/* 페이지 하단 */
+
+footer {
+  background: #10243d;
+  color: #d5dfeb;
+  padding: 27px 22px;
+  font-size: 12px;
+}
+
+.footer-inner {
+  max-width: 1120px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.footer-inner a {
+  color: #fff;
+}
+
+.footnote {
+  color: #aebed0;
+  margin-top: 10px;
+  max-width: 740px;
+}
+
+/* 모바일 화면 대응 */
+
+@media (max-width: 800px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nav-links {
+    gap: 10px;
+  }
+
+  .lower {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding-top: 45px;
+  }
+}
+
+@media (max-width: 540px) {
+  .nav-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nav-links {
+    font-size: 12px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .section-head {
+    align-items: flex-start;
+    flex-direction: column;
