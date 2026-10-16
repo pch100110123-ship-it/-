@@ -29,5 +29,165 @@ html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px);scroll-behavio
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.75 var(--sans);word-break:keep-all}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
 a{color:inherit}
-mark{background:lin
-    
+mark{background:linear-gradient(transparent 55%,var(--hl) 55%);color:inherit;padding:0 1px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.top{padding:36px 0 20px}
+.top h1{font:700 clamp(28px,5vw,42px)/1.25 var(--serif);margin:0 0 10px}
+.top p{margin:0;color:var(--muted);max-width:52ch}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 8px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.fact b{display:block;font:700 22px/1.3 var(--serif);color:var(--accent)}
+.fact span{font-size:13px;color:var(--muted)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 0}
+.bar .wrap{display:flex;flex-direction:column;gap:8px}
+#q{width:100%;font:inherit;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink)}
+#q:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+.chips a{flex:none;text-decoration:none;font-size:14px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted)}
+.chips a:hover{color:var(--accent);border-color:var(--accent)}
+main{padding:24px 0 56px}
+section{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px 22px 14px;margin-bottom:18px}
+section h2{font:700 21px/1.4 var(--serif);margin:0 0 4px}
+section h2 small{display:block;font:400 15px/1.6 var(--sans);color:var(--muted);margin-top:2px}
+ul{list-style:none;margin:12px 0 0;padding:0}
+li{padding:11px 0;border-top:1px solid var(--line)}
+li:first-child{border-top:0}
+li .k{display:inline-block;font-weight:700;color:var(--accent);margin-right:8px}
+li .sub{display:block;margin-top:4px;color:var(--muted);font-size:15px}
+.tag{display:inline-block;font-size:12.5px;font-weight:700;padding:1px 9px;border-radius:999px;background:var(--accent);color:var(--accent-ink);margin-right:6px;vertical-align:1px}
+.tag.w{background:var(--warn);color:#fff}
+.steps{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:12px 0 4px;padding:0;list-style:none}
+.steps li{border:1px solid var(--line);border-radius:8px;padding:6px 12px;background:var(--bg);font-weight:500;font-size:15px}
+.steps li+li::before{content:"›";margin-right:8px;color:var(--muted)}
+.steps li{border-top:1px solid var(--line)}
+.hide{display:none!important}
+#none{display:none;text-align:center;color:var(--muted);padding:40px 0}
+footer{color:var(--muted);font-size:13.5px;padding:0 0 40px}
+@media (min-width:760px){section{padding:26px 30px 18px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1>학급 규정 정리</h1>
+  <p>복장, 기기 사용, 출결, 선도 처분, 학교폭력·교권 침해까지 학교생활에서 꼭 알아야 할 규정을 한곳에 모았습니다.</p>
+  <div class="facts" aria-label="핵심 기준">
+    <div class="fact"><b>8시 30분</b><span>교실 착석 기준, 넘으면 지각</span></div>
+    <div class="fact"><b>3회 이상</b><span>수업 중 무단 사용 적발 시 압수</span></div>
+    <div class="fact"><b>15분 내외</b><span>수업 일부 불참 기준(결과)</span></div>
+    <div class="fact"><b>5일 / 10일</b><span>미인정 결석 연속 / 누계</span></div>
+  </div>
+</div></header>
+
+<div class="bar"><div class="wrap">
+  <input id="q" type="search" placeholder="규정 검색 (예: 지각, 휴대폰, 흡연)" aria-label="규정 검색">
+  <nav class="chips" aria-label="목차">
+    <a href="#s1">복장·신발</a><a href="#s2">수업 방해</a><a href="#s3">전자기기</a><a href="#s4">소지품 검사</a>
+    <a href="#s5">출결</a><a href="#s6">선도 처분</a><a href="#s7">처분 사유</a><a href="#s8">학폭·교권</a>
+  </nav>
+</div></div>
+
+<main><div class="wrap">
+
+<section id="s1">
+  <h2>1. 기본 생활(복장)<small><mark>학교의 품격·위신을 손상시키지 않는 복장</mark>을 착용합니다.</small></h2>
+  <ul>
+    <li><span class="k">가. 복장</span>교복 및 생활복, 체육복 상·하의 중 하나 이상을 착용해야 합니다. 다만 교복 착용에 대해 대부분의 학교에서 제재를 가하지 않습니다. 타인에게 불쾌감을 주는 복장은 교내에서 지도할 수 있습니다.</li>
+    <li><span class="k">나. 신발</span><mark>등교 시 슬리퍼·크록스를 신고 등교하지 않도록</mark> 지도합니다. 교실에 실내화를 비치하고, <mark>급식소 안에서는 실내화를 착용</mark>합니다.</li>
+  </ul>
+</section>
+
+<section id="s2">
+  <h2>2. 수업 중 방해 학생 분리 조치<small>2026년 법 개정</small></h2>
+  <ul>
+    <li><span class="tag">제20조 4</span>수업 방해가 반복되면 교실에서 분리하고, 보호자에게 인계한 뒤 가정학습 조치를 할 수 있습니다. 이때 <b>출석 인정</b>으로 처리합니다.</li>
+  </ul>
+</section>
+
+<section id="s3">
+  <h2>3. 정보통신기기·스마트기기<small>스마트폰, 태블릿, 무선 이어폰 등</small></h2>
+  <ul>
+    <li><span class="k">가. 휴대폰</span>등교 시 제출하고 하교 시 반환합니다. 담임 또는 교과 지도 교사의 허락을 구한 뒤 사용할 수 있습니다.
+      <span class="sub">2026년 법 개정으로 <mark>수업 중 지도교사의 허락을 받지 않고 전자기기 사용 금지</mark></span></li>
+    <li><span class="k">나. 반복 적발</span>수업 중 무단 사용 적발이 <mark>3회 이상</mark> 반복되면 스마트기기 압수 및 선도위원회 회부가 가능합니다.
+      <span class="sub">반복될 경우 교권 침해로 접수될 수도 있습니다.</span></li>
+    <li><span class="k">다. 시험 기간</span>전자기기를 소지할 수 없으며, 소지 시 부정행위로 처리합니다. (학업성적관리규정, 생활지도 규정 등)</li>
+  </ul>
+</section>
+
+<section id="s4">
+  <h2>4. 소지품 검사</h2>
+  <ul>
+    <li><span class="k">가. 원칙</span>소지품 검사는 원칙적으로 시행하지 않습니다. 다만 <mark>긴급한 상황 또는 합리적 의심의 이유</mark>(불법 촬영, 물품 분실 현장에서의 CCTV, 목격 학생의 구체적인 제보 등)가 있으면 가능합니다. <mark>검사가 필요하면 생활안전부에 협조를 요청</mark>합니다.</li>
+    <li><span class="k">나. 불응 시</span>학생이 교사의 정당한 소지품 검사에 불응하면 선도위원회에 회부합니다. 사안에 따라 경찰관이 출동할 수 있습니다.</li>
+  </ul>
+</section>
+
+<section id="s5">
+  <h2>5. 기본 생활(출결 규정)</h2>
+  <ul>
+    <li><span class="k">가. 지각</span><mark>8시 30분까지 교실에 착석하지 못한 경우 지각 처리</mark>합니다. (학년부에서 일관되게 지도)</li>
+    <li><span class="k">나. 조퇴</span>종례 시간 이전에 하교하는 경우입니다.</li>
+    <li><span class="k">다. 결과</span>수업 시간(50분) 중 전부 또는 <mark>일부(15분 내외) 수업에 불참</mark>한 경우입니다. 누계되면 교과 미이수 또는 졸업 차질이 생길 수 있습니다.</li>
+  </ul>
+</section>
+
+<section id="s6">
+  <h2>6. 학생 선도 처분(징계)<small>선도 처분이 확정되면 학급 임원(반장) 등에서 <mark>중도 자격을 상실</mark>합니다.</small></h2>
+  <p style="margin:12px 0 0"><b>가. 선도 처분의 종류와 단계</b></p>
+  <ol class="steps" style="list-style:none">
+    <li>교내봉사</li><li>사회봉사</li><li>특별교육 이수</li><li>출석정지(정학, 최대 3회)</li><li>퇴학</li>
+  </ol>
+</section>
+
+<section id="s7">
+  <h2>7. 선도 처분의 주요 사유</h2>
+  <ul>
+    <li><span class="k">가.</span>미인정 결석, 지각, 조퇴, 결과 등 — <mark>미인정 결석 연속 5일 및 누계 10일</mark>, <mark>미인정 지각·결과 등 누계 15회부터</mark></li>
+    <li><span class="k">나.</span>교육공동체 타인의 권리를 침해하는 행위</li>
+    <li><span class="k">다.</span>고사 중 적극적(계획적) 부정행위</li>
+    <li><span class="k">라.</span><mark>학교 건물 내외 흡연(음주)으로 적발</mark></li>
+    <li><span class="k">마.</span>출입 금지 장소(유해 업소) 등 출입</li>
+    <li><span class="k">바.</span>교사의 정당한 지도에 대해 반복적으로 반항·불응하는 경우 등</li>
+    <li><span class="k">사.</span>각종 형법·행정조치법(도로교통법 등) 위반으로 경찰에 신고되거나 민원을 초래하는 경우</li>
+  </ul>
+</section>
+
+<section id="s8">
+  <h2>8. 학교폭력과 교권 침해의 처벌 강화</h2>
+  <ul>
+    <li><span class="k">가.</span>학교폭력과 교권 침해의 처리는 <b>특별법</b>에 따라 집행합니다.</li>
+    <li><span class="k">나.</span>학교폭력은 <mark>대입에 직접 반영</mark>됩니다. 교권 침해는 현재 학생부에 기재하지 않지만 출석정지 등 강한 처벌을 받습니다.</li>
+    <li><span class="k">다.</span>학교폭력은 누구나 가해·피해 학생이 될 수 있습니다. 언어 표현이나 행동에서 약간의 배려가 부족해도 학교폭력으로 신고될 수 있습니다. <mark>조금이라도 의심되는 일을 당했다면 반드시 학교 생활안전부에 문의</mark>하세요.</li>
+    <li><span class="k">라. 주요 교권 침해</span>
+      <mark>지도교사에 대한 모욕, 뒷담화 등으로 인한 명예 훼손</mark>, <mark>교사의 면전에서 심한 욕설 또는 위협하는 동작</mark>, <mark>물리적으로 상해를 가하는 행위</mark>, <mark>법과 학교 규칙 등에 의한 정당한 지도에 반복적으로 불응하는 행위</mark> 등</li>
+  </ul>
+</section>
+
+<div id="none">검색 결과가 없습니다. 다른 단어로 찾아보세요.</div>
+</div></main>
+
+<footer><div class="wrap">이 페이지는 학급 규정 정리 자료를 바탕으로 만들었습니다. 세부 기준은 학교의 학칙과 생활지도 규정을 확인하세요.</div></footer>
+
+<script>
+(function(){
+  var q=document.getElementById('q'), secs=[].slice.call(document.querySelectorAll('main section')), none=document.getElementById('none');
+  q.addEventListener('input',function(){
+    var t=q.value.trim().toLowerCase(), shown=0;
+    secs.forEach(function(s){
+      var items=[].slice.call(s.querySelectorAll('ul > li')), head=s.querySelector('h2').textContent.toLowerCase(), any=false;
+      if(!t){ items.forEach(function(i){i.classList.remove('hide')}); s.classList.remove('hide'); shown++; return; }
+      var headHit=head.indexOf(t)>-1, stepsHit=s.querySelector('.steps') && s.textContent.toLowerCase().indexOf(t)>-1;
+      items.forEach(function(i){
+        var hit=headHit||i.textContent.toLowerCase().indexOf(t)>-1;
+        i.classList.toggle('hide',!hit); if(hit) any=true;
+      });
+      var show=any||stepsHit||headHit;
+      s.classList.toggle('hide',!show); if(show) shown++;
+    });
+    none.style.display=shown?'none':'block';
+  });
+})();
+</script>
+</body>
+</html>
