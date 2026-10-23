@@ -107,7 +107,6 @@
             <span class="text-xs text-slate-500 dark:text-slate-400">학급 규정 가이드</span>
           </div>
           <h1 class="font-head text-3xl sm:text-4xl text-slate-900 dark:text-white">🏫 학교 교칙</h1>
-          <p class="text-slate-600 dark:text-slate-400 mt-1 text-sm sm:text-base">보고 싶은 학급 규정을 선택하세요.</p>
         </div>
       </div>
 
@@ -163,8 +162,17 @@
     </section>
 
     <!-- DYNAMIC DETAIL VIEW SECTION -->
-    <section id="detailView" class="page-sec hidden space-y-5">
+    <section id="detailView" class="page-sec hidden space-y-5 relative">
+      <!-- Floating Side Navigation Arrows -->
+      <button id="sidePrevBtn" aria-label="이전 규정" class="fixed left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 shadow-lg text-slate-700 dark:text-slate-200 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 font-bold text-xl sm:text-2xl flex items-center justify-center transition-all backdrop-blur-sm">
+        ‹
+      </button>
+      <button id="sideNextBtn" aria-label="다음 규정" class="fixed right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 shadow-lg text-slate-700 dark:text-slate-200 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 font-bold text-xl sm:text-2xl flex items-center justify-center transition-all backdrop-blur-sm">
+        ›
+      </button>
+
       <!-- Dynamic rendering via JavaScript -->
+      <div id="detailContent" class="space-y-5"></div>
     </section>
 
     <!-- Bottom Navigation Bar for Detail View -->
@@ -423,6 +431,9 @@ let bookmarks = [];
 const menuContainer = document.getElementById('menuContainer');
 const bookmarkContainer = document.getElementById('bookmarkContainer');
 const detailView = document.getElementById('detailView');
+const detailContent = document.getElementById('detailContent');
+const sidePrevBtn = document.getElementById('sidePrevBtn');
+const sideNextBtn = document.getElementById('sideNextBtn');
 const pagerNav = document.getElementById('pagerNav');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
@@ -996,7 +1007,7 @@ function renderDetailView(catId) {
     `;
   }
 
-  detailView.innerHTML = `
+  detailContent.innerHTML = `
     <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
       <div class="flex items-center gap-3">
         <span class="text-4xl">${cat.ic}</span>
@@ -1057,19 +1068,22 @@ function navigate() {
       pageCounter.textContent = `${activeIdx + 1} / ${catIds.length}`;
       progressBar.style.width = `${((activeIdx + 1) / catIds.length) * 100}%`;
 
-      if (activeIdx > 0) {
-        prevBtn.onclick = () => location.hash = catIds[activeIdx - 1];
-      } else {
-        prevBtn.onclick = () => location.hash = 'home';
-      }
+      const goPrev = () => {
+        if (activeIdx > 0) location.hash = catIds[activeIdx - 1];
+        else location.hash = 'home';
+      };
 
-      if (activeIdx < catIds.length - 1) {
-        nextBtn.textContent = '다음 ›';
-        nextBtn.onclick = () => location.hash = catIds[activeIdx + 1];
-      } else {
-        nextBtn.textContent = '목차로 🏫';
-        nextBtn.onclick = () => location.hash = 'home';
-      }
+      const goNext = () => {
+        if (activeIdx < catIds.length - 1) location.hash = catIds[activeIdx + 1];
+        else location.hash = 'home';
+      };
+
+      prevBtn.onclick = goPrev;
+      sidePrevBtn.onclick = goPrev;
+
+      nextBtn.textContent = activeIdx < catIds.length - 1 ? '다음 ›' : '목차로 🏫';
+      nextBtn.onclick = goNext;
+      sideNextBtn.onclick = goNext;
     }
   }
 
