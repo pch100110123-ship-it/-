@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>학교 교칙</title>
+<title>학교 교칙 정리</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
@@ -66,7 +66,7 @@
   <header class="sticky top-0 z-30 bg-[#f5faff]/90 dark:bg-[#0f1e2b]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
     <div class="max-w-2xl mx-auto px-4 h-14 flex items-center justify-between gap-2">
       <a href="#home" id="homeBtn" class="flex items-center gap-2 font-head text-lg text-brand-600 dark:text-brand-500 font-bold hover:opacity-80 transition-opacity">
-        <span>🏫</span> <span>학교 교칙</span>
+        <span>🏫</span> <span>학교 교칙 정리</span>
       </a>
 
       <div class="flex items-center gap-2 sm:gap-3">
@@ -106,7 +106,7 @@
             <span class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-500 bg-brand-50 dark:bg-brand-500/10 px-2 py-0.5 rounded-md">2026학년도</span>
             <span class="text-xs text-slate-500 dark:text-slate-400">학급 규정 가이드</span>
           </div>
-          <h1 class="font-head text-3xl sm:text-4xl text-slate-900 dark:text-white">🏫 학교 교칙</h1>
+          <h1 class="font-head text-3xl sm:text-4xl text-slate-900 dark:text-white">🏫 학교 교칙 정리</h1>
         </div>
       </div>
 
@@ -176,13 +176,10 @@
     </section>
 
     <!-- Bottom Navigation Bar for Detail View -->
-    <nav id="pagerNav" class="hidden mt-8 pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3">
-      <button id="prevBtn" class="flex-1 py-3 px-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors flex items-center justify-center gap-1">
-        ‹ 이전
-      </button>
-      <button id="nextBtn" class="flex-1 py-3 px-4 rounded-xl bg-brand-500 text-white font-bold text-xs sm:text-sm hover:bg-brand-600 transition-colors flex items-center justify-center gap-1 shadow-sm">
-        다음 ›
-      </button>
+    <nav id="pagerNav" class="hidden mt-8 pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-center">
+      <a href="#home" class="py-2.5 px-6 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-700 font-bold text-xs sm:text-sm transition-colors flex items-center gap-1 shadow-sm">
+        🏫 목차로 돌아가기
+      </a>
     </nav>
 
   </main>
@@ -961,6 +958,19 @@ function renderDetailView(catId) {
 
   const isBookmarked = bookmarks.includes(catId);
 
+  // Essential Rule Notice Banner
+  let essentialBanner = '';
+  if (cat.key) {
+    essentialBanner = `
+      <div class="bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/80 rounded-2xl p-3.5 flex items-start gap-3 shadow-sm">
+        <span class="text-xl shrink-0">⚠️</span>
+        <p class="text-xs sm:text-sm font-semibold text-amber-900 dark:text-amber-200 leading-relaxed">
+          학생들이 학교생활을 하면서 많이 놓치는 교칙입니다. 꼭 지켜주세요.
+        </p>
+      </div>
+    `;
+  }
+
   let itemsHtml = '';
   cat.items.forEach((item, itemIdx) => {
     let itemAdminControls = '';
@@ -1023,7 +1033,9 @@ function renderDetailView(catId) {
 
     ${adminCatHeaderBtn}
 
-    <div class="space-y-3 pt-2">
+    ${essentialBanner}
+
+    <div class="space-y-3 pt-1">
       ${itemsHtml}
     </div>
   `;
@@ -1078,11 +1090,7 @@ function navigate() {
         else location.hash = 'home';
       };
 
-      prevBtn.onclick = goPrev;
       sidePrevBtn.onclick = goPrev;
-
-      nextBtn.textContent = activeIdx < catIds.length - 1 ? '다음 ›' : '목차로 🏫';
-      nextBtn.onclick = goNext;
       sideNextBtn.onclick = goNext;
     }
   }
