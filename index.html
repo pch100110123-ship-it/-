@@ -1,42 +1,98 @@
 (function(){
-  var pages=[].slice.call(document.querySelectorAll('.page')).filter(function(p){return p.id!=='home'});
-  var ids=pages.map(function(p){return p.id});
-  var menu=document.getElementById('menu'), count=document.getElementById('count'), homeLink=document.getElementById('homeLink');
-  var prevArrow=document.getElementById('prevArrow'), nextArrow=document.getElementById('nextArrow');
+  var pages = [].slice.call(document.querySelectorAll('.page')).filter(function(p){ return p.id !== 'home'; });
+  var ids = pages.map(function(p){ return p.id; });
+  var menu = document.getElementById('menu'),
+      count = document.getElementById('count'),
+      homeLink = document.getElementById('homeLink');
+  var prevArrow = document.getElementById('prevArrow'),
+      nextArrow = document.getElementById('nextArrow');
 
-  function item(p){
-    var tags='';
-    if(p.dataset.new) tags+='<span class="tag new">NEW</span>';
-    if(p.dataset.key) tags+='<span class="tag">필수</span>';
-    return '<li><a href="#'+p.id+'"><span class="ic">'+p.dataset.ic+'</span><span class="nm">'+p.dataset.nm+'</span>'+tags+'<span class="go">›</span></a></li>';
-  }
-  var html='<li class="sep">꼭 지켜요</li>';
-  pages.filter(function(p){return p.dataset.key}).forEach(function(p){html+=item(p)});
-  html+='<li class="sep">이것도 알아두세요</li>';
-  pages.filter(function(p){return !p.dataset.key}).forEach(function(p){html+=item(p)});
-  menu.innerHTML=html;
+  // 메뉴 항목을 HTML 문자열로 생성하는 부분 제거됨
 
   function show(){
-    var id=location.hash.slice(1), i=ids.indexOf(id);
-    document.querySelectorAll('.page').forEach(function(p){p.classList.toggle('on',p.id===(i<0?'home':id))});
-    if(i<0){
-      count.textContent=''; homeLink.style.visibility='hidden';
-      prevArrow.style.display='none'; nextArrow.style.display='none';
-    }else{
-      homeLink.style.visibility='visible'; count.textContent=(i+1)+' / '+ids.length;
-      prevArrow.style.display=i>0?'flex':'none';
-      nextArrow.style.display=i<ids.length-1?'flex':'none';
-      prevArrow.onclick=function(){if(i>0)location.hash=ids[i-1];};
-      nextArrow.onclick=function(){if(i<ids.length-1)location.hash=ids[i+1];};
+    var id = location.hash.slice(1),
+        i = ids.indexOf(id);
+    document.querySelectorAll('.page').forEach(function(p){
+      p.classList.toggle('on', p.id === (i < 0 ? 'home' : id));
+    });
+    if(i < 0){
+      count.textContent = '';
+      homeLink.style.visibility = 'hidden';
+      prevArrow.style.display = 'none';
+      nextArrow.style.display = 'none';
+    } else {
+      homeLink.style.visibility = 'visible';
+      count.textContent = (i + 1) + ' / ' + ids.length;
+      prevArrow.style.display = i > 0 ? 'flex' : 'none';
+      nextArrow.style.display = i < ids.length - 1 ? 'flex' : 'none';
+
+      prevArrow.onclick = function(){
+        if(i > 0) location.hash = ids[i - 1];
+      };
+      nextArrow.onclick = function(){
+        if(i < ids.length - 1) location.hash = ids[i + 1];
+      };
     }
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
-  window.addEventListener('hashchange',show);
-  document.addEventListener('keydown',function(e){
-    var i=ids.indexOf(location.hash.slice(1));
-    if(i<0||e.target.tagName==='INPUT')return;
-    if(e.key==='ArrowRight'&&i<ids.length-1)location.hash=ids[i+1];
-    if(e.key==='ArrowLeft'&&i>0)location.hash=ids[i-1];
+
+  window.addEventListener('hashchange', show);
+  
+  document.addEventListener('keydown', function(e){
+    var i = ids.indexOf(location.hash.slice(1));
+    if(i < 0 || e.target.tagName === 'INPUT') return;
+    if(e.key === 'ArrowRight' && i < ids.length - 1) location.hash = ids[i + 1];
+    if(e.key === 'ArrowLeft' && i > 0) location.hash = ids[i - 1];
   });
+
+  show();
+})();
+(function(){
+  var pages = [].slice.call(document.querySelectorAll('.page')).filter(function(p){ return p.id !== 'home'; });
+  var ids = pages.map(function(p){ return p.id; });
+  var menu = document.getElementById('menu'),
+      count = document.getElementById('count'),
+      homeLink = document.getElementById('homeLink');
+  var prevArrow = document.getElementById('prevArrow'),
+      nextArrow = document.getElementById('nextArrow');
+
+  // 메뉴 항목을 HTML 문자열로 생성하는 부분 제거됨
+
+  function show(){
+    var id = location.hash.slice(1),
+        i = ids.indexOf(id);
+    document.querySelectorAll('.page').forEach(function(p){
+      p.classList.toggle('on', p.id === (i < 0 ? 'home' : id));
+    });
+    if(i < 0){
+      count.textContent = '';
+      homeLink.style.visibility = 'hidden';
+      prevArrow.style.display = 'none';
+      nextArrow.style.display = 'none';
+    } else {
+      homeLink.style.visibility = 'visible';
+      count.textContent = (i + 1) + ' / ' + ids.length;
+      prevArrow.style.display = i > 0 ? 'flex' : 'none';
+      nextArrow.style.display = i < ids.length - 1 ? 'flex' : 'none';
+
+      prevArrow.onclick = function(){
+        if(i > 0) location.hash = ids[i - 1];
+      };
+      nextArrow.onclick = function(){
+        if(i < ids.length - 1) location.hash = ids[i + 1];
+      };
+    }
+    window.scrollTo(0, 0);
+  }
+
+  window.addEventListener('hashchange', show);
+  
+  document.addEventListener('keydown', function(e){
+    var i = ids.indexOf(location.hash.slice(1));
+    if(i < 0 || e.target.tagName === 'INPUT') return;
+    if(e.key === 'ArrowRight' && i < ids.length - 1) location.hash = ids[i + 1];
+    if(e.key === 'ArrowLeft' && i > 0) location.hash = ids[i - 1];
+  });
+
   show();
 })();
