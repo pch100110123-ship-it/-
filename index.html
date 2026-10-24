@@ -1,101 +1,714 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>학교 교칙 정리</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+:root {
+  --bg: #f4f8fb;
+  --surface: #ffffff;
+  --ink: #16324a;
+  --muted: #5d7488;
+  --line: #d8e5f0;
+  --acc: #2575fc;
+  --acc-ink: #ffffff;
+  --acc-soft: #eaf2ff;
+  --new: #ff3b5c;
+  --new-soft: #ffebee;
+  --hl: #fff2a8;
+  --no: #6f8394;
+  --warn: #ff9800;
+  --warn-soft: #fff8e1;
+  --head: "Jua", "Noto Sans KR", sans-serif;
+  --body: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 
-  <!-- Top Fixed Bar -->
-  <header class="topbar">
-    <div class="wrap">
-      <div class="brand-area">
-        <a class="home" href="#home" id="homeLink" style="visibility: hidden;">🏫 목차</a>
-        <span class="count" id="count"></span>
-      </div>
-      <div class="actions">
-        <button id="themeToggleBtn" class="icon-btn" aria-label="테마 변경">🌙</button>
-        <button id="adminToggleBtn" class="btn btn-sm btn-outline">⚙️ 관리자</button>
-      </div>
-    </div>
-  </header>
+  color-scheme: light;
+  box-sizing: border-box;
+}
 
-  <!-- Admin Mode Banner -->
-  <div id="adminBanner" class="admin-banner" style="display: none;">
-    <div class="wrap admin-banner-content">
-      <span>🔓 <strong>관리자 편집 모드 작동 중</strong></span>
-      <div class="admin-banner-btns">
-        <button id="btnExport" class="btn btn-xs">💾 데이터 백업(JSON)</button>
-        <button id="btnImport" class="btn btn-xs">📂 데이터 불러오기</button>
-        <button id="btnReset" class="btn btn-xs btn-danger-soft">🔄 초기화</button>
-        <button id="btnExitAdmin" class="btn btn-xs btn-outline">🔒 관리자 종료</button>
-      </div>
-    </div>
-  </div>
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1822;
+    --surface: #182635;
+    --ink: #eaefd5;
+    --ink: #e6f1f8;
+    --muted: #8aa4b8;
+    --line: #263c50;
+    --acc: #4facfe;
+    --acc-ink: #0b131c;
+    --acc-soft: #162f45;
+    --new: #ff6b81;
+    --new-soft: #381a24;
+    --hl: #5a4b00;
+    --no: #8aa4b8;
+    --warn: #ffa726;
+    --warn-soft: #332712;
+    color-scheme: dark;
+  }
+}
 
-  <input type="file" id="fileInput" accept=".json" style="display:none;">
+:root[data-theme="dark"] {
+  --bg: #0f1822;
+  --surface: #182635;
+  --ink: #e6f1f8;
+  --muted: #8aa4b8;
+  --line: #263c50;
+  --acc: #4facfe;
+  --acc-ink: #0b131c;
+  --acc-soft: #162f45;
+  --new: #ff6b81;
+  --new-soft: #381a24;
+  --hl: #5a4b00;
+  --no: #8aa4b8;
+  --warn: #ffa726;
+  --warn-soft: #332712;
+  color-scheme: dark;
+}
 
-  <main class="wrap main-content">
-    <!-- Home View -->
-    <section class="page on" id="home">
-      <div class="home-header">
-        <h1>🏫 학교 교칙 정리</h1>
-      </div>
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
-      <!-- Controls & Search -->
-      <div class="search-bar">
-        <span class="search-ic">🔍</span>
-        <input type="text" id="searchInput" placeholder="궁금한 교칙 검색 (예: 지각, 교복, 핸드폰)...">
-        <button id="searchClear" class="search-clear" style="display:none;">✕</button>
-      </div>
+html {
+  height: 100%;
+}
 
-      <!-- Category Tabs -->
-      <div class="tabs" id="categoryFilter">
-        <button class="tab-btn active" data-filter="all">전체보기</button>
-        <button class="tab-btn" data-filter="key">⭐ 필수규정</button>
-        <button class="tab-btn" data-filter="new">🔥 신설/개정</button>
-        <button class="tab-btn" data-filter="fav">🔖 즐겨찾기</button>
-      </div>
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.65 var(--body);
+  word-break: keep-all;
+  -webkit-font-smoothing: antialiased;
+}
 
-      <!-- Category List -->
-      <ul class="menu" id="menuList"></ul>
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-      <!-- Admin Add Category Button -->
-      <div id="adminAddCatContainer" style="display: none; margin-top: 20px;">
-        <button id="btnAddCategory" class="btn btn-primary full-width">+ 새 카테고리 추가</button>
-      </div>
-    </section>
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
 
-    <!-- Dynamic Category Pages rendered by JS -->
-    <div id="dynamicPages"></div>
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
 
-    <!-- Navigation Footer -->
-    <nav class="pager" id="pager" aria-label="페이지 이동"></nav>
-  </main>
+.wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
 
-  <!-- Side Navigation Floating Arrows -->
-  <button id="prevArrow" class="side-arrow prev-arrow" aria-label="이전 페이지">‹</button>
-  <button id="nextArrow" class="side-arrow next-arrow" aria-label="다음 페이지">›</button>
+/* Top Bar */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--bg);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
 
-  <!-- Modal Component for Editing -->
-  <div id="modalOverlay" class="modal-overlay">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 id="modalTitle">편집</h3>
-        <button id="modalClose" class="modal-close">✕</button>
-      </div>
-      <div class="modal-body" id="modalBody"></div>
-      <div class="modal-footer">
-        <button id="modalCancelBtn" class="btn btn-outline">취소</button>
-        <button id="modalSaveBtn" class="btn btn-primary">저장하기</button>
-      </div>
-    </div>
-  </div>
+.topbar .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+.brand-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar a.home {
+  font-weight: 700;
+  color: var(--acc);
+  font-size: 16px;
+}
+
+.topbar .count {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+/* Admin Banner */
+.admin-banner {
+  background: #2b303b;
+  color: #fff;
+  padding: 8px 0;
+  font-size: 13px;
+  border-bottom: 1px solid #3f4656;
+}
+
+.admin-banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-banner-btns {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.btn-xs {
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+
+.btn-xs:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.btn-primary {
+  background: var(--acc);
+  color: var(--acc-ink);
+}
+
+.btn-outline {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.btn-danger-soft {
+  background: var(--new-soft);
+  color: var(--new);
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Main Layout */
+.main-content {
+  padding-bottom: 60px;
+}
+
+.page {
+  display: none;
+  padding: 24px 0;
+  animation: fadeIn 0.2s ease;
+}
+
+.page.on {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  font: 400 clamp(28px, 6vw, 38px)/1.2 var(--head);
+  margin: 0 0 10px;
+}
+
+.home-header {
+  margin-bottom: 16px;
+}
+
+/* Search Bar */
+.search-bar {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 38px 12px 42px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  outline: none;
+  font-size: 15px;
+}
+
+.search-bar input:focus {
+  border-color: var(--acc);
+  box-shadow: 0 0 0 3px var(--acc-soft);
+}
+
+.search-ic {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.search-clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 14px;
+  padding: 4px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  margin-bottom: 16px;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-btn {
+  white-space: nowrap;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.tab-btn.active {
+  background: var(--acc);
+  color: var(--acc-ink);
+  border-color: var(--acc);
+}
+
+/* Category Menu List */
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.menu li.category-item {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.menu li.category-item:hover {
+  border-color: var(--acc);
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+}
+
+.menu .ic {
+  font-size: 26px;
+  width: 32px;
+  text-align: center;
+}
+
+.menu .nm {
+  flex: 1;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.tags-group {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.tag {
+  font: 400 12px/1 var(--head);
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--acc);
+  color: var(--acc-ink);
+}
+
+.tag.new { background: var(--new); color: #fff; }
+
+.fav-btn {
+  font-size: 18px;
+  color: var(--line);
+  padding: 4px;
+  margin-left: 4px;
+}
+
+.fav-btn.active {
+  color: #ffca28;
+}
+
+/* Essential Banner Inside Category */
+.essential-banner {
+  background: var(--warn-soft);
+  border: 1px solid var(--warn);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.essential-banner .warn-ic {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* Category Header in View */
+.ptitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.ptitle-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ptitle .ic {
+  font-size: 36px;
+}
+
+/* Rules Cards */
+.rules {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.rules li {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.rules li.isnew {
+  background: var(--new-soft);
+  border-color: var(--new);
+}
+
+.rule-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.rules .sm {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+/* Badges for rules */
+.badge {
+  display: inline-block;
+  font: 400 12.5px/1 var(--head);
+  border-radius: 999px;
+  padding: 4px 8px;
+  margin-right: 6px;
+  vertical-align: 1px;
+  color: #fff;
+}
+
+.badge.ok { background: var(--acc); color: var(--acc-ink); }
+.badge.no { background: var(--no); color: #fff; }
+.badge.new { background: var(--new); color: #fff; }
+.badge.warn { background: var(--warn); color: #fff; }
+.badge.info { background: #00bcd4; color: #fff; }
+
+mark {
+  background: linear-gradient(transparent 55%, var(--hl) 55%);
+  color: inherit;
+  padding: 0 2px;
+}
+
+/* Flow list (Steps) */
+.flow {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  counter-reset: step-counter;
+}
+
+.flow li {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 14px 18px 14px 54px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.flow li::before {
+  content: counter(step-counter);
+  counter-increment: step-counter;
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--acc);
+  color: var(--acc-ink);
+  font: 400 15px/28px var(--head);
+  text-align: center;
+}
+
+.flow li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 27px;
+  top: 100%;
+  height: 14px;
+  border-left: 2px dotted var(--acc);
+}
+
+/* Pager */
+.pager {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.pager a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+/* Floating Side Navigation Arrows */
+.side-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 25;
+  width: 44px;
+  height: 64px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: opacity 0.2s, transform 0.2s;
+  opacity: 0.85;
+}
+
+.side-arrow:hover {
+  opacity: 1;
+  background: var(--acc-soft);
+  color: var(--acc);
+}
+
+.prev-arrow {
+  left: 12px;
+  border-radius: 0 16px 16px 0;
+}
+
+.next-arrow {
+  right: 12px;
+  border-radius: 16px 0 0 16px;
+}
+
+@media (max-width: 768px) {
+  .side-arrow {
+    width: 36px;
+    height: 52px;
+    font-size: 22px;
+  }
+  .prev-arrow { left: 0; }
+  .next-arrow { right: 0; }
+}
+
+/* Admin Controls inside Cards */
+.admin-item-controls {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  backdrop-filter: blur(3px);
+}
+
+.modal-overlay.on {
+  display: flex;
+}
+
+.modal-content {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font: 400 20px var(--head);
+}
+
+.modal-close {
+  font-size: 20px;
+  color: var(--muted);
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Form Controls */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.form-group input[type="text"],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  outline: none;
+}
+
+.form-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--acc);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 500 !important;
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--muted);
+}
