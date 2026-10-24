@@ -1,714 +1,161 @@
-:root {
-  --bg: #f4f8fb;
-  --surface: #ffffff;
-  --ink: #16324a;
-  --muted: #5d7488;
-  --line: #d8e5f0;
-  --acc: #2575fc;
-  --acc-ink: #ffffff;
-  --acc-soft: #eaf2ff;
-  --new: #ff3b5c;
-  --new-soft: #ffebee;
-  --hl: #fff2a8;
-  --no: #6f8394;
-  --warn: #ff9800;
-  --warn-soft: #fff8e1;
-  --head: "Jua", "Noto Sans KR", sans-serif;
-  --body: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --radius-lg: 18px;
-  --radius-md: 12px;
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-
-  color-scheme: light;
-  box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0f1822;
-    --surface: #182635;
-    --ink: #eaefd5;
-    --ink: #e6f1f8;
-    --muted: #8aa4b8;
-    --line: #263c50;
-    --acc: #4facfe;
-    --acc-ink: #0b131c;
-    --acc-soft: #162f45;
-    --new: #ff6b81;
-    --new-soft: #381a24;
-    --hl: #5a4b00;
-    --no: #8aa4b8;
-    --warn: #ffa726;
-    --warn-soft: #332712;
-    color-scheme: dark;
-  }
-}
-
-:root[data-theme="dark"] {
-  --bg: #0f1822;
-  --surface: #182635;
-  --ink: #e6f1f8;
-  --muted: #8aa4b8;
-  --line: #263c50;
-  --acc: #4facfe;
-  --acc-ink: #0b131c;
-  --acc-soft: #162f45;
-  --new: #ff6b81;
-  --new-soft: #381a24;
-  --hl: #5a4b00;
-  --no: #8aa4b8;
-  --warn: #ffa726;
-  --warn-soft: #332712;
-  color-scheme: dark;
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-html {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  min-height: 100%;
-  background: var(--bg);
-  color: var(--ink);
-  font: 400 16px/1.65 var(--body);
-  word-break: keep-all;
-  -webkit-font-smoothing: antialiased;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button, input, select, textarea {
-  font: inherit;
-  color: inherit;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
-}
-
-.wrap {
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 0 18px;
-}
-
-/* Top Bar */
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  background: var(--bg);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--line);
-}
-
-.topbar .wrap {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 56px;
-}
-
-.brand-area {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.topbar a.home {
-  font-weight: 700;
-  color: var(--acc);
-  font-size: 16px;
-}
-
-.topbar .count {
-  color: var(--muted);
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.icon-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-}
-
-/* Admin Banner */
-.admin-banner {
-  background: #2b303b;
-  color: #fff;
-  padding: 8px 0;
-  font-size: 13px;
-  border-bottom: 1px solid #3f4656;
-}
-
-.admin-banner-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.admin-banner-btns {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-/* Buttons */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 14px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  transition: all 0.2s ease;
-}
-
-.btn-sm {
-  padding: 6px 12px;
-  font-size: 13px;
-}
-
-.btn-xs {
-  padding: 4px 8px;
-  font-size: 12px;
-  border-radius: 6px;
-  background: rgba(255,255,255,0.15);
-  color: #fff;
-}
-
-.btn-xs:hover {
-  background: rgba(255,255,255,0.25);
-}
-
-.btn-primary {
-  background: var(--acc);
-  color: var(--acc-ink);
-}
-
-.btn-outline {
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--ink);
-}
-
-.btn-danger-soft {
-  background: var(--new-soft);
-  color: var(--new);
-}
-
-.full-width {
-  width: 100%;
-}
-
-/* Main Layout */
-.main-content {
-  padding-bottom: 60px;
-}
-
-.page {
-  display: none;
-  padding: 24px 0;
-  animation: fadeIn 0.2s ease;
-}
-
-.page.on {
-  display: block;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-h1 {
-  font: 400 clamp(28px, 6vw, 38px)/1.2 var(--head);
-  margin: 0 0 10px;
-}
-
-.home-header {
-  margin-bottom: 16px;
-}
-
-/* Search Bar */
-.search-bar {
-  position: relative;
-  margin-bottom: 16px;
-}
-
-.search-bar input {
-  width: 100%;
-  padding: 12px 38px 12px 42px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--ink);
-  outline: none;
-  font-size: 15px;
-}
-
-.search-bar input:focus {
-  border-color: var(--acc);
-  box-shadow: 0 0 0 3px var(--acc-soft);
-}
-
-.search-ic {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--muted);
-  font-size: 16px;
-}
-
-.search-clear {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--muted);
-  font-size: 14px;
-  padding: 4px;
-}
-
-/* Tabs */
-.tabs {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 6px;
-  margin-bottom: 16px;
-  scrollbar-width: none;
-}
-
-.tabs::-webkit-scrollbar {
-  display: none;
-}
-
-.tab-btn {
-  white-space: nowrap;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  font-size: 13.5px;
-  font-weight: 500;
-  color: var(--muted);
-}
-
-.tab-btn.active {
-  background: var(--acc);
-  color: var(--acc-ink);
-  border-color: var(--acc);
-}
-
-/* Category Menu List */
-.menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 10px;
-}
-
-.menu li.category-item {
-  position: relative;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  transition: border-color 0.2s, transform 0.15s;
-}
-
-.menu li.category-item:hover {
-  border-color: var(--acc);
-}
-
-.menu-link {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px 18px;
-}
-
-.menu .ic {
-  font-size: 26px;
-  width: 32px;
-  text-align: center;
-}
-
-.menu .nm {
-  flex: 1;
-  font-weight: 600;
-  font-size: 17px;
-}
-
-.tags-group {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-}
-
-.tag {
-  font: 400 12px/1 var(--head);
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: var(--acc);
-  color: var(--acc-ink);
-}
-
-.tag.new { background: var(--new); color: #fff; }
-
-.fav-btn {
-  font-size: 18px;
-  color: var(--line);
-  padding: 4px;
-  margin-left: 4px;
-}
-
-.fav-btn.active {
-  color: #ffca28;
-}
-
-/* Essential Banner Inside Category */
-.essential-banner {
-  background: var(--warn-soft);
-  border: 1px solid var(--warn);
-  border-radius: var(--radius-md);
-  padding: 12px 16px;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--ink);
-  font-size: 14.5px;
-  font-weight: 500;
-  line-height: 1.45;
-}
-
-.essential-banner .warn-ic {
-  font-size: 20px;
-  flex-shrink: 0;
-}
-
-/* Category Header in View */
-.ptitle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
-}
-
-.ptitle-main {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.ptitle .ic {
-  font-size: 36px;
-}
-
-/* Rules Cards */
-.rules {
-  list-style: none;
-  margin: 16px 0 0;
-  padding: 0;
-  display: grid;
-  gap: 12px;
-}
-
-.rules li {
-  position: relative;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: 16px 18px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-}
-
-.rules li.isnew {
-  background: var(--new-soft);
-  border-color: var(--new);
-}
-
-.rule-title {
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.rules .sm {
-  display: block;
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 14.5px;
-  line-height: 1.5;
-}
-
-/* Badges for rules */
-.badge {
-  display: inline-block;
-  font: 400 12.5px/1 var(--head);
-  border-radius: 999px;
-  padding: 4px 8px;
-  margin-right: 6px;
-  vertical-align: 1px;
-  color: #fff;
-}
-
-.badge.ok { background: var(--acc); color: var(--acc-ink); }
-.badge.no { background: var(--no); color: #fff; }
-.badge.new { background: var(--new); color: #fff; }
-.badge.warn { background: var(--warn); color: #fff; }
-.badge.info { background: #00bcd4; color: #fff; }
-
-mark {
-  background: linear-gradient(transparent 55%, var(--hl) 55%);
-  color: inherit;
-  padding: 0 2px;
-}
-
-/* Flow list (Steps) */
-.flow {
-  list-style: none;
-  margin: 20px 0 0;
-  padding: 0;
-  counter-reset: step-counter;
-}
-
-.flow li {
-  position: relative;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  padding: 14px 18px 14px 54px;
-  font-weight: 700;
-  margin-bottom: 14px;
-}
-
-.flow li::before {
-  content: counter(step-counter);
-  counter-increment: step-counter;
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--acc);
-  color: var(--acc-ink);
-  font: 400 15px/28px var(--head);
-  text-align: center;
-}
-
-.flow li:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  left: 27px;
-  top: 100%;
-  height: 14px;
-  border-left: 2px dotted var(--acc);
-}
-
-/* Pager */
-.pager {
-  display: flex;
-  justify-content: center;
-  margin-top: 28px;
-}
-
-.pager a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 24px;
-  border-radius: var(--radius-md);
-  font-weight: 700;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--ink);
-  box-shadow: var(--shadow);
-}
-
-/* Floating Side Navigation Arrows */
-.side-arrow {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 25;
-  width: 44px;
-  height: 64px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  color: var(--ink);
-  font-size: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: opacity 0.2s, transform 0.2s;
-  opacity: 0.85;
-}
-
-.side-arrow:hover {
-  opacity: 1;
-  background: var(--acc-soft);
-  color: var(--acc);
-}
-
-.prev-arrow {
-  left: 12px;
-  border-radius: 0 16px 16px 0;
-}
-
-.next-arrow {
-  right: 12px;
-  border-radius: 16px 0 0 16px;
-}
-
-@media (max-width: 768px) {
-  .side-arrow {
-    width: 36px;
-    height: 52px;
-    font-size: 22px;
-  }
-  .prev-arrow { left: 0; }
-  .next-arrow { right: 0; }
-}
-
-/* Admin Controls inside Cards */
-.admin-item-controls {
-  display: flex;
-  gap: 6px;
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px dashed var(--line);
-}
-
-/* Modal */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 100;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-  backdrop-filter: blur(3px);
-}
-
-.modal-overlay.on {
-  display: flex;
-}
-
-.modal-content {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  width: 100%;
-  max-width: 500px;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.modal-header {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.modal-header h3 {
-  margin: 0;
-  font: 400 20px var(--head);
-}
-
-.modal-close {
-  font-size: 20px;
-  color: var(--muted);
-}
-
-.modal-body {
-  padding: 20px;
-}
-
-.modal-footer {
-  padding: 14px 20px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-/* Form Controls */
-.form-group {
-  margin-bottom: 16px;
-}
-
-.form-group label {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-.form-group input[type="text"],
-.form-group textarea,
-.form-group select {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--line);
-  background: var(--bg);
-  color: var(--ink);
-  outline: none;
-}
-
-.form-group input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--acc);
-}
-
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  font-weight: 500 !important;
-}
-
-.no-results {
-  text-align: center;
-  padding: 40px 0;
-  color: var(--muted);
-}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>학교 교칙 정리</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+  <a class="home" href="#home" id="homeLink">🏫 목차</a>
+  <span class="count" id="count"></span>
+</div></div>
+
+<main class="wrap">
+
+<section class="page on" id="home">
+  <h1>🏫 학교 교칙 정리</h1>
+  <ul class="menu" id="menu"></ul>
+</section>
+
+<section class="page" id="attend" data-ic="⏰" data-nm="출결" data-key="1">
+  <div class="ptitle">
+    <div class="ptitle-main"><span class="ic">⏰</span><h1>출결</h1></div>
+  </div>
+  <div class="essential-banner">
+    <span class="warn-ic">⚠️</span>
+    <span>학생들이 학교생활을 하면서 많이 놓치는 교칙입니다. 꼭 지켜주세요.</span>
+  </div>
+  <ul class="rules">
+    <li><b>지각</b><span class="sm"><mark>8시 30분까지 교실에 앉지 못하면 지각</mark>이에요. (학년부에서 일관되게 지도해요)</span></li>
+    <li><b>조퇴</b><span class="sm">종례 시간 전에 하교하는 것이에요.</span></li>
+    <li><b>결과</b><span class="sm">수업(50분) 전부 또는 일부(15분 내외) 수업에 참여하지 않는 것이에요. 쌓이면 교과 미이수, 졸업 차질이 생길 수 있어요.</span></li>
+  </ul>
+</section>
+
+<section class="page" id="dress" data-ic="👕" data-nm="복장 · 신발" data-key="1">
+  <div class="ptitle">
+    <div class="ptitle-main"><span class="ic">👕</span><h1>복장 · 신발</h1></div>
+  </div>
+  <div class="essential-banner">
+    <span class="warn-ic">⚠️</span>
+    <span>학생들이 학교생활을 하면서 많이 놓치는 교칙입니다. 꼭 지켜주세요.</span>
+  </div>
+  <p class="lead">학교의 품격과 위신을 손상시키지 않는 복장을 입어요.</p>
+  <ul class="rules">
+    <li><span class="ok">OK</span>교복, 생활복, 체육복 상·하의 중 하나 이상 입기</li>
+    <li><span class="no">NO</span>타인에게 불쾌감을 주는 복장은 지도받을 수 있어요
+      <span class="sm">교복을 안 입어도 대부분 학교는 제재하지 않아요.</span></li>
+    <li><span class="no">NO</span>슬리퍼·크록스를 신고 등교하기</li>
+    <li><span class="ok">OK</span>교실과 급식소에서는 실내화 신기</li>
+  </ul>
+</section>
+
+<section class="page" id="phone" data-ic="📱" data-nm="스마트기기" data-key="1" data-new="1">
+  <div class="ptitle">
+    <div class="ptitle-main"><span class="ic">📱</span><h1>스마트기기</h1></div>
+  </div>
+  <div class="essential-banner">
+    <span class="warn-ic">⚠️</span>
+    <span>학생들이 학교생활을 하면서 많이 놓치는 교칙입니다. 꼭 지켜주세요.</span>
+  </div>
+  <p class="lead">스마트폰, 태블릿, 무선 이어폰 등이에요.</p>
+  <ul class="rules">
+    <li class="isnew"><span class="new">NEW</span><mark>수업 중 지도교사의 허락 없이 전자기기 사용 금지</mark>
+      <span class="sm">2026년 법 개정</span></li>
+    <li><span class="ok">OK</span>휴대폰은 등교 때 내고 하교 때 받기 (담임 또는 교과 선생님 허락 후 사용)</li>
+    <li><span class="no">3회</span>수업 중 무단 사용이 3회 이상 반복되면 압수, 선도위원회 회부
+      <span class="sm">반복되면 교권 침해로 접수될 수도 있어요.</span></li>
+    <li><span class="no">NO</span>시험 기간에는 소지 불가, 소지하면 부정행위로 처리해요</li>
+  </ul>
+</section>
+
+<section class="page" id="disrupt" data-ic="🙋" data-nm="수업 방해" data-new="1">
+  <div class="ptitle">
+    <div class="ptitle-main"><span class="ic">🙋</span><h1>수업 방해</h1></div>
+  </div>
+  <ul class="rules">
+    <li class="isnew"><span class="new">NEW</span>2026년 법 개정 (제20조 4)</li>
+    <li>수업 방해가 반복되면 교실에서 분리해요.</li>
+    <li>보호자에게 인계한 뒤 가정학습 조치를 할 수 있어요.</li>
+    <li><span class="ok">OK</span>이때는 <b>출석 인정</b>으로 처리해요.</li>
+  </ul>
+</section>
+
+<section class="page" id="search" data-ic="🎒" data-nm="소지품 검사">
+  <div class="ptitle">
+    <div class="ptitle-main"><span class="ic">🎒</span><h1>소지품 검사</h1></div>
+  </div>
+  <ul class="rules">
+    <li><span class="no">NO</span>원칙적으로 하지 않아요.</li>
+    <li><span class="ok">예외</span>긴급한 상황이거나 합리적인 의심이 있을 때는 할 수 있어요.
+      <span class="sm">예: 불법 촬영, 분실 현장 CCTV, 목격 학생의 구체적인 제보. 검사가 필요하면 생활안전부에 협조를 요청해요.</span></li>
+    <li><span class="no">NO</span>정당한 검사에 따르지 않으면 선도위원회에 회부해요. 사안에 따라 경찰관이 출동할 수 있어요.</li>
+  </ul>
+</section>
+
+<section class="page" id="violence" data-ic="🤝" data-nm="학교폭력 · 교권 침해">
+  <div class="ptitle">
+    <div class="ptitle-main"><span class="ic">🤝</span><h1>학교폭력 · 교권 침해</h1></div>
+  </div>
+  <ul class="rules">
+    <li>처리는 <b>특별법</b>에 따라 해요.</li>
+    <li>학교폭력은 대입에 직접 반영돼요. 교권 침해는 학생부에 기재하지 않지만 출석정지 등 강한 처벌을 받아요.</li>
+    <li>누구나 가해·피해 학생이 될 수 있어요. 말이나 행동에서 배려가 조금 부족해도 학교폭력으로 신고될 수 있어요.</li>
+    <li><span class="ok">도움</span>조금이라도 의심되는 일을 겪었다면 반드시 생활안전부에 문의하세요.</li>
+  </ul>
+</section>
+
+<section class="page" id="authority" data-ic="⚠️" data-nm="교권 침해로 보는 행동">
+  <div class="ptitle">
+    <div class="ptitle-main"><span class="ic">⚠️</span><h1>교권 침해로 보는 행동</h1></div>
+  </div>
+  <ul class="rules">
+    <li>지도교사에 대한 모욕, 뒷담화 등으로 인한 명예 훼손</li>
+    <li>교사 면전에서 심한 욕설을 하거나 위협하는 동작</li>
+    <li>물리적으로 상해를 가하는 행위</li>
+    <li>법과 학교 규칙에 따른 정당한 지도에 반복적으로 따르지 않는 행위 등</li>
+  </ul>
+</section>
+
+<section class="page" id="steps" data-ic="📈" data-nm="선도 처분 단계">
+  <div class="ptitle">
+    <div class="ptitle-main"><span class="ic">📈</span><h1>선도 처분 단계</h1></div>
+  </div>
+  <ol class="flow">
+    <li>교내봉사</li><li>사회봉사</li><li>특별교육 이수</li><li>출석정지 (정학, 최대 3회)</li><li>퇴학</li>
+  </ol>
+  <p class="note">선도 처분이 확정되면 학급 임원(반장) 등에서 중도 자격을 잃어요.</p>
+</section>
+
+<section class="page" id="reasons" data-ic="🚫" data-nm="선도 처분을 받는 경우">
+  <div class="ptitle">
+    <div class="ptitle-main"><span class="ic">🚫</span><h1>선도 처분을 받는 경우</h1></div>
+  </div>
+  <ul class="rules">
+    <li><b>출결</b><span class="sm">미인정 결석 연속 5일 · 누계 10일, 미인정 지각·결과 등 누계 15회부터</span></li>
+    <li>교육공동체 타인의 권리를 침해하는 행위</li>
+    <li>고사 중 적극적(계획적) 부정행위</li>
+    <li>학교 건물 안팎 흡연(음주) 적발</li>
+    <li>출입 금지 장소(유해 업소) 등 출입</li>
+    <li>교사의 정당한 지도에 반복적으로 반항·불응</li>
+    <li>형법·행정조치법(도로교통법 등) 위반으로 경찰 신고 또는 민원 발생</li>
+  </ul>
+</section>
+
+<nav class="pager" id="pager" aria-label="페이지 이동">
+  <a href="#home">🏫 목차로 돌아가기</a>
+</nav>
+
+</main>
+
+<button id="prevArrow" class="side-arrow prev-arrow" aria-label="이전 페이지">‹</button>
+<button id="nextArrow" class="side-arrow next-arrow" aria-label="다음 페이지">›</button>
+
+<script src="script.js"></script>
+</body>
+</html>
